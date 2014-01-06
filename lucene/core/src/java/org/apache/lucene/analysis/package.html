@@ -386,7 +386,15 @@ and proximity searches (though sentence identification is not provided by Lucene
   <li>The first position increment must be &gt; 0.</li>
   <li>Positions must not go backward.</li>
   <li>Tokens that have the same start position must have the same start offset.</li>
-  <li>Tokens that have the same end position (taking into account the position length) must have the same end offset.</li>
+  <li>Tokens that have the same end position (taking into account the
+  position length) must have the same end offset.</li>
+  <li>Tokenizers must call {@link
+  org.apache.lucene.util.AttributeSource#clearAttributes()} in
+  incrementToken().</li>
+  <li>Tokenizers must override {@link
+  org.apache.lucene.analysis.TokenStream#end(), and pass the final
+  offset (the total number of input characters processed) to both
+  parameters of {@link org.apache.lucene.analysis.tokenattributes.OffsetAttribute#setOffset(int, int)}.</li>
 </ul>
 <p>
    Although these rules might seem easy to follow, problems can quickly happen when chaining
@@ -467,6 +475,17 @@ and proximity searches (though sentence identification is not provided by Lucene
     </td>
   </tr>
 </table>
+<h3>Testing Your Analysis Component</h3>
+<p>
+    The lucene-test-framework component defines
+    {@link org.apache.lucene.analysis.BaseTokenStreamTestCase}. By extending
+    this class, you can create JUnit tests that validate that your
+    Analyzer and/or analysis components correctly implement the
+    protocol. {@link
+    org.apache.lucene.analysis.BaseTokenStreamTestCase#checkRandomData(java.util.Random,
+    org.apache.lucene.analysis.Analyzer, int)}
+    is particularly effective in flushing out errors.
+</p>
 <h3>Using the TokenStream API</h3>
 There are a few important things to know in order to use the new API efficiently which are summarized here. You may want
 to walk through the example below first and come back to this section afterwards.
