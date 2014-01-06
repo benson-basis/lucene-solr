@@ -392,7 +392,7 @@ and proximity searches (though sentence identification is not provided by Lucene
   org.apache.lucene.util.AttributeSource#clearAttributes()} in
   incrementToken().</li>
   <li>Tokenizers must override {@link
-  org.apache.lucene.analysis.TokenStream#end(), and pass the final
+  org.apache.lucene.analysis.TokenStream#end()}, and pass the final
   offset (the total number of input characters processed) to both
   parameters of {@link org.apache.lucene.analysis.tokenattributes.OffsetAttribute#setOffset(int, int)}.</li>
 </ul>
@@ -478,13 +478,10 @@ and proximity searches (though sentence identification is not provided by Lucene
 <h3>Testing Your Analysis Component</h3>
 <p>
     The lucene-test-framework component defines
-    {@link org.apache.lucene.analysis.BaseTokenStreamTestCase}. By extending
+    <a href="{@docRoot}/../test-framework/org/apache/lucene/analysis/BaseTokenStreamTestCase">BaseTokenStreamTestCase</a>. By extending
     this class, you can create JUnit tests that validate that your
     Analyzer and/or analysis components correctly implement the
-    protocol. {@link
-    org.apache.lucene.analysis.BaseTokenStreamTestCase#checkRandomData(java.util.Random,
-    org.apache.lucene.analysis.Analyzer, int)}
-    is particularly effective in flushing out errors.
+    protocol. The checkRandomData methods of that class are particularly effective in flushing out errors.
 </p>
 <h3>Using the TokenStream API</h3>
 There are a few important things to know in order to use the new API efficiently which are summarized here. You may want
