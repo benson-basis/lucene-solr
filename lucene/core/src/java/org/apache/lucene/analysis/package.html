@@ -403,7 +403,7 @@ and proximity searches (though sentence identification is not provided by Lucene
 </p>
 <ul>
   <li>Token filters should not modify offsets. If you feel that your filter would need to modify offsets, then it should probably be implemented as a tokenizer.</li>
-  <li>Token filters should not insert positions. If a filter needs to add tokens, then they shoud all have a position increment of 0.</li>
+  <li>Token filters should not insert positions. If a filter needs to add tokens, then they should all have a position increment of 0.</li>
   <li>When they remove tokens, token filters should increment the position increment of the following token.</li>
   <li>Token filters should preserve position lengths.</li>
 </ul>
