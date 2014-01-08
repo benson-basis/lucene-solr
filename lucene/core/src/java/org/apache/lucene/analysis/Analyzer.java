@@ -31,7 +31,7 @@ import java.util.Map;
  * policy for extracting index terms from text.
  * <p>
  * In order to define what analysis is done, subclasses must define their
- * {@link TokenStreamComponents TokenStreamComponents} in {@link #createComponents(String, Reader)}.
+ * {@link TokenStreamComponents TokenStreamComponents} in {@link #createComponents(String)}.
  * The components are then reused in each call to {@link #tokenStream(String, Reader)}.
  * <p>
  * Simple example:
@@ -101,18 +101,16 @@ public abstract class Analyzer implements Closeable {
    * @param fieldName
    *          the name of the fields content passed to the
    *          {@link TokenStreamComponents} sink as a reader
-   * @param reader
-   *          the reader passed to the {@link Tokenizer} constructor
+
    * @return the {@link TokenStreamComponents} for this analyzer.
    */
-  protected abstract TokenStreamComponents createComponents(String fieldName,
-      Reader reader);
+  protected abstract TokenStreamComponents createComponents(String fieldName);
 
   /**
    * Returns a TokenStream suitable for <code>fieldName</code>, tokenizing
    * the contents of <code>reader</code>.
    * <p>
-   * This method uses {@link #createComponents(String, Reader)} to obtain an
+   * This method uses {@link #createComponents(String)} to obtain an
    * instance of {@link TokenStreamComponents}. It returns the sink of the
    * components and stores the components internally. Subsequent calls to this
    * method will reuse the previously stored components after resetting them
@@ -139,7 +137,7 @@ public abstract class Analyzer implements Closeable {
     TokenStreamComponents components = reuseStrategy.getReusableComponents(this, fieldName);
     final Reader r = initReader(fieldName, reader);
     if (components == null) {
-      components = createComponents(fieldName, r);
+      components = createComponents(fieldName);
       reuseStrategy.setReusableComponents(this, fieldName, components);
     }
     components.setReader(r);
@@ -150,7 +148,7 @@ public abstract class Analyzer implements Closeable {
    * Returns a TokenStream suitable for <code>fieldName</code>, tokenizing
    * the contents of <code>text</code>.
    * <p>
-   * This method uses {@link #createComponents(String, Reader)} to obtain an
+   * This method uses {@link #createComponents(String)} to obtain an
    * instance of {@link TokenStreamComponents}. It returns the sink of the
    * components and stores the components internally. Subsequent calls to this
    * method will reuse the previously stored components after resetting them
@@ -176,7 +174,7 @@ public abstract class Analyzer implements Closeable {
     strReader.setValue(text);
     final Reader r = initReader(fieldName, strReader);
     if (components == null) {
-      components = createComponents(fieldName, r);
+      components = createComponents(fieldName);
       reuseStrategy.setReusableComponents(this, fieldName, components);
     }
     components.setReader(r);
