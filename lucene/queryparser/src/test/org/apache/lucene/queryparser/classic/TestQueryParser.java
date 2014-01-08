@@ -322,7 +322,7 @@ public class TestQueryParser extends QueryParserTestBase {
   static class MockSynonymAnalyzer extends Analyzer {
     @Override
     protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-      MockTokenizer tokenizer = new MockTokenizer(reader);
+      MockTokenizer tokenizer = new MockTokenizer();
       return new TokenStreamComponents(tokenizer, new MockSynonymFilter(tokenizer));
     }
   }
@@ -392,7 +392,7 @@ public class TestQueryParser extends QueryParserTestBase {
   static class MockCJKSynonymAnalyzer extends Analyzer {
     @Override
     protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-      Tokenizer tokenizer = new SimpleCJKTokenizer(reader);
+      Tokenizer tokenizer = new SimpleCJKTokenizer();
       return new TokenStreamComponents(tokenizer, new MockCJKSynonymFilter(tokenizer));
     }
   }

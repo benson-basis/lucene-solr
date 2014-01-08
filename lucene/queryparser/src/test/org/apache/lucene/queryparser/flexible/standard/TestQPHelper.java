@@ -148,7 +148,7 @@ public class TestQPHelper extends LuceneTestCase {
     /** Filters MockTokenizer with StopFilter. */
     @Override
     public final TokenStreamComponents createComponents(String fieldName, Reader reader) {
-      Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
+      Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
       return new TokenStreamComponents(tokenizer, new QPTestFilter(tokenizer));
     }
   }
@@ -345,8 +345,8 @@ public class TestQPHelper extends LuceneTestCase {
   private class SimpleCJKTokenizer extends Tokenizer {
     private CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
 
-    public SimpleCJKTokenizer(Reader input) {
-      super(input);
+    public SimpleCJKTokenizer() {
+      super();
     }
 
     @Override
@@ -363,7 +363,7 @@ public class TestQPHelper extends LuceneTestCase {
   private class SimpleCJKAnalyzer extends Analyzer {
     @Override
     public TokenStreamComponents createComponents(String fieldName, Reader reader) {
-      return new TokenStreamComponents(new SimpleCJKTokenizer(reader));
+      return new TokenStreamComponents(new SimpleCJKTokenizer());
     }
   }
   
@@ -1267,8 +1267,8 @@ public class TestQPHelper extends LuceneTestCase {
     private final PositionIncrementAttribute posIncr = addAttribute(PositionIncrementAttribute.class);
     private final CharTermAttribute term = addAttribute(CharTermAttribute.class);
 
-    public CannedTokenizer(Reader reader) {
-      super(reader);
+    public CannedTokenizer() {
+      super();
     }
 
     @Override
@@ -1304,7 +1304,7 @@ public class TestQPHelper extends LuceneTestCase {
   private class CannedAnalyzer extends Analyzer {
     @Override
     public TokenStreamComponents createComponents(String ignored, Reader alsoIgnored) {
-      return new TokenStreamComponents(new CannedTokenizer(alsoIgnored));
+      return new TokenStreamComponents(new CannedTokenizer());
     }
   }
 

@@ -76,7 +76,7 @@ public class FuzzyTermOnShortTermsTest extends LuceneTestCase {
       return new Analyzer() {
          @Override
          public TokenStreamComponents createComponents(String fieldName, Reader reader) {
-            Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
+            Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
             return new TokenStreamComponents(tokenizer, tokenizer);
          }
       };

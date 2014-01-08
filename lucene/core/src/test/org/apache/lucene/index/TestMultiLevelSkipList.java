@@ -113,7 +113,7 @@ public class TestMultiLevelSkipList extends LuceneTestCase {
     private final AtomicInteger payloadCount = new AtomicInteger(-1);
     @Override
     public TokenStreamComponents createComponents(String fieldName, Reader reader) {
-      Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, true);
+      Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, true);
       return new TokenStreamComponents(tokenizer, new PayloadFilter(payloadCount, tokenizer));
     }
 

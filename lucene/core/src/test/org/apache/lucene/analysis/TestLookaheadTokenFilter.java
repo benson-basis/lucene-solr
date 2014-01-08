@@ -28,7 +28,7 @@ public class TestLookaheadTokenFilter extends BaseTokenStreamTestCase {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
         Random random = random();
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, random.nextBoolean());
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, random.nextBoolean());
         TokenStream output = new MockRandomLookaheadTokenFilter(random, tokenizer);
         return new TokenStreamComponents(tokenizer, output);
       }
@@ -56,7 +56,7 @@ public class TestLookaheadTokenFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, random().nextBoolean());
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, random().nextBoolean());
         TokenStream output = new NeverPeeksLookaheadTokenFilter(tokenizer);
         return new TokenStreamComponents(tokenizer, output);
       }
@@ -69,7 +69,7 @@ public class TestLookaheadTokenFilter extends BaseTokenStreamTestCase {
       @Override
       protected TokenStreamComponents createComponents(String fieldName,
                                                        Reader reader) {
-        Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer source = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         TrivialLookaheadFilter filter = new TrivialLookaheadFilter(source);
         return new TokenStreamComponents(source, filter);
      }

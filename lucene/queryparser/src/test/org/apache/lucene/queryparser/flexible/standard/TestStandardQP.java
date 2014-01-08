@@ -120,8 +120,7 @@ public class TestStandardQP extends QueryParserTestBase {
       @Override
       public TokenStreamComponents createComponents(String fieldName,
           Reader reader) {
-        return new TokenStreamComponents(new MockTokenizer(reader,
-            MockTokenizer.WHITESPACE, false));
+        return new TokenStreamComponents(new MockTokenizer(MockTokenizer.WHITESPACE, false));
       }
     };
     assertQueryEquals("a - b", a, "a -b");

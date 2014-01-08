@@ -254,7 +254,7 @@ public class TestAnalyzingQueryParser extends LuceneTestCase {
   final static class ASCIIAnalyzer extends Analyzer {
     @Override
     public TokenStreamComponents createComponents(String fieldName, Reader reader) {
-      Tokenizer result = new MockTokenizer(reader, MockTokenizer.WHITESPACE, true);
+      Tokenizer result = new MockTokenizer(MockTokenizer.WHITESPACE, true);
       return new TokenStreamComponents(result, new FoldingFilter(result));
     }
   }

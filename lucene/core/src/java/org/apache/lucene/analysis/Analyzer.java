@@ -141,9 +141,8 @@ public abstract class Analyzer implements Closeable {
     if (components == null) {
       components = createComponents(fieldName, r);
       reuseStrategy.setReusableComponents(this, fieldName, components);
-    } else {
-      components.setReader(r);
     }
+    components.setReader(r);
     return components.getTokenStream();
   }
   
@@ -179,9 +178,8 @@ public abstract class Analyzer implements Closeable {
     if (components == null) {
       components = createComponents(fieldName, r);
       reuseStrategy.setReusableComponents(this, fieldName, components);
-    } else {
-      components.setReader(r);
     }
+    components.setReader(r);
     components.reusableStringReader = strReader;
     return components.getTokenStream();
   }

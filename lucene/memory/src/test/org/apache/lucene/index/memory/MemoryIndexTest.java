@@ -262,7 +262,7 @@ public class MemoryIndexTest extends BaseTokenStreamTestCase {
       case 2: return new Analyzer() {
         @Override
         protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-          Tokenizer tokenizer = new MockTokenizer(reader);
+          Tokenizer tokenizer = new MockTokenizer();
           return new TokenStreamComponents(tokenizer, new CrazyTokenFilter(tokenizer));
         }
       };

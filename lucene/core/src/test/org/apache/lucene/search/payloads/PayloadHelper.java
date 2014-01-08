@@ -64,7 +64,7 @@ public class PayloadHelper {
 
     @Override
     public TokenStreamComponents createComponents(String fieldName, Reader reader) {
-      Tokenizer result = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
+      Tokenizer result = new MockTokenizer(MockTokenizer.SIMPLE, true);
       return new TokenStreamComponents(result, new PayloadFilter(result, fieldName));
     }
   }

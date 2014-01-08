@@ -980,7 +980,7 @@ public class TestIndexWriterDelete extends LuceneTestCase {
     final Analyzer analyzer = new Analyzer() {
       @Override
       public TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        return new TokenStreamComponents(new MockTokenizer(reader, MockTokenizer.WHITESPACE, true));
+        return new TokenStreamComponents(new MockTokenizer(MockTokenizer.WHITESPACE, true));
       }
     };
     IndexWriter w = new IndexWriter(dir, newIndexWriterConfig( TEST_VERSION_CURRENT, analyzer).setRAMBufferSizeMB(1.0).setMaxBufferedDocs(IndexWriterConfig.DISABLE_AUTO_FLUSH).setMaxBufferedDeleteTerms(IndexWriterConfig.DISABLE_AUTO_FLUSH));

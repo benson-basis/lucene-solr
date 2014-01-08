@@ -391,7 +391,7 @@ public class TestIndexWriterExceptions extends LuceneTestCase {
     Analyzer analyzer = new Analyzer(Analyzer.PER_FIELD_REUSE_STRATEGY) {
       @Override
       public TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        MockTokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        MockTokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         tokenizer.setEnableChecks(false); // disable workflow checking as we forcefully close() in exceptional cases.
         return new TokenStreamComponents(tokenizer, new CrashingFilter(fieldName, tokenizer));
       }
@@ -457,7 +457,7 @@ public class TestIndexWriterExceptions extends LuceneTestCase {
 
       @Override
       public TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        MockTokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
+        MockTokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
         tokenizer.setEnableChecks(false); // disable workflow checking as we forcefully close() in exceptional cases.
         return new TokenStreamComponents(tokenizer, new TokenFilter(tokenizer) {
           private int count = 0;
@@ -594,7 +594,7 @@ public class TestIndexWriterExceptions extends LuceneTestCase {
     Analyzer analyzer = new Analyzer(Analyzer.PER_FIELD_REUSE_STRATEGY) {
       @Override
       public TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        MockTokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        MockTokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         tokenizer.setEnableChecks(false); // disable workflow checking as we forcefully close() in exceptional cases.
         return new TokenStreamComponents(tokenizer, new CrashingFilter(fieldName, tokenizer));
       }
@@ -689,7 +689,7 @@ public class TestIndexWriterExceptions extends LuceneTestCase {
     Analyzer analyzer = new Analyzer(Analyzer.PER_FIELD_REUSE_STRATEGY) {
       @Override
       public TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        MockTokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        MockTokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         tokenizer.setEnableChecks(false); // disable workflow checking as we forcefully close() in exceptional cases.
         return new TokenStreamComponents(tokenizer, new CrashingFilter(fieldName, tokenizer));
       }
@@ -1365,7 +1365,8 @@ public class TestIndexWriterExceptions extends LuceneTestCase {
       if (docCount == 4) {
         Field f = newTextField("crash", "", Field.Store.NO);
         doc.add(f);
-        MockTokenizer tokenizer = new MockTokenizer(new StringReader("crash me on the 4th token"), MockTokenizer.WHITESPACE, false);
+        MockTokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
+        tokenizer.setReader(new StringReader("crash me on the 4th token"));
         tokenizer.setEnableChecks(false); // disable workflow checking as we forcefully close() in exceptional cases.
         f.setTokenStream(new CrashingFilter("crash", tokenizer));
       }
@@ -1444,7 +1445,8 @@ public class TestIndexWriterExceptions extends LuceneTestCase {
       if (docCount == crashAt) {
         Field f = newTextField("crash", "", Field.Store.NO);
         doc.add(f);
-        MockTokenizer tokenizer = new MockTokenizer(new StringReader("crash me on the 4th token"), MockTokenizer.WHITESPACE, false);
+        MockTokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
+        tokenizer.setReader(new StringReader("crash me on the 4th token"));
         tokenizer.setEnableChecks(false); // disable workflow checking as we forcefully close() in exceptional cases.
         f.setTokenStream(new CrashingFilter("crash", tokenizer));
       }

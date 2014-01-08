@@ -27,7 +27,7 @@ public class MockBytesAnalyzer extends Analyzer {
   
   @Override
   protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-    Tokenizer t = new MockTokenizer(factory, reader, MockTokenizer.KEYWORD, false, MockTokenizer.DEFAULT_MAX_TOKEN_LENGTH);
+    Tokenizer t = new MockTokenizer(factory, MockTokenizer.KEYWORD, false, MockTokenizer.DEFAULT_MAX_TOKEN_LENGTH);
     return new TokenStreamComponents(t);
   }
 }

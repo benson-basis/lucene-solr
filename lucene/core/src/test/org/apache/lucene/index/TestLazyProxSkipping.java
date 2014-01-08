@@ -71,7 +71,7 @@ public class TestLazyProxSkipping extends LuceneTestCase {
         final Analyzer analyzer = new Analyzer() {
           @Override
           public TokenStreamComponents createComponents(String fieldName, Reader reader) {
-            return new TokenStreamComponents(new MockTokenizer(reader, MockTokenizer.WHITESPACE, true));
+            return new TokenStreamComponents(new MockTokenizer(MockTokenizer.WHITESPACE, true));
           }
         };
         Directory directory = new SeekCountingDirectory(new RAMDirectory());
