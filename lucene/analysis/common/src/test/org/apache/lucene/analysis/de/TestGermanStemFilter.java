@@ -19,7 +19,6 @@ package org.apache.lucene.analysis.de;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Reader;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.BaseTokenStreamTestCase;
@@ -42,9 +41,8 @@ import static org.apache.lucene.analysis.VocabularyAssert.*;
 public class TestGermanStemFilter extends BaseTokenStreamTestCase {
   Analyzer analyzer = new Analyzer() {
     @Override
-    protected TokenStreamComponents createComponents(String fieldName,
-        Reader reader) {
-      Tokenizer t = new KeywordTokenizer(reader);
+    protected TokenStreamComponents createComponents(String fieldName) {
+      Tokenizer t = new KeywordTokenizer();
       return new TokenStreamComponents(t,
           new GermanStemFilter(new LowerCaseFilter(TEST_VERSION_CURRENT, t)));
     }
@@ -67,7 +65,7 @@ public class TestGermanStemFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer source = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         TokenStream sink = new SetKeywordMarkerFilter(source, exclusionSet);
         return new TokenStreamComponents(source, new GermanStemFilter(sink));
       }
@@ -84,7 +82,7 @@ public class TestGermanStemFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new GermanStemFilter(tokenizer));
       }
     };

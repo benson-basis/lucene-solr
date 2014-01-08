@@ -31,8 +31,7 @@ import org.apache.lucene.analysis.core.KeywordTokenizer;
 public class TestLengthFilter extends BaseTokenStreamTestCase {
 
   public void testFilterWithPosIncr() throws Exception {
-    TokenStream stream = new MockTokenizer(
-        new StringReader("short toolong evenmuchlongertext a ab toolong foo"), MockTokenizer.WHITESPACE, false);
+    TokenStream stream = whitespaceMockTokenizer("short toolong evenmuchlongertext a ab toolong foo");
     LengthFilter filter = new LengthFilter(TEST_VERSION_CURRENT, stream, 2, 6);
     assertTokenStreamContents(filter,
       new String[]{"short", "ab", "foo"},
@@ -44,7 +43,7 @@ public class TestLengthFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new LengthFilter(TEST_VERSION_CURRENT, tokenizer, 0, 5));
       }
     };

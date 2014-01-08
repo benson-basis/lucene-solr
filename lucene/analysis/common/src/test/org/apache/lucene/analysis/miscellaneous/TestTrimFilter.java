@@ -99,7 +99,7 @@ public class TestTrimFilter extends BaseTokenStreamTestCase {
 
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.KEYWORD, false);
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.KEYWORD, false);
         return new TokenStreamComponents(tokenizer, new TrimFilter(TEST_VERSION_CURRENT, tokenizer));
       } 
     };
@@ -110,7 +110,7 @@ public class TestTrimFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         final Version version = TEST_VERSION_CURRENT;
         return new TokenStreamComponents(tokenizer, new TrimFilter(version, tokenizer));
       }

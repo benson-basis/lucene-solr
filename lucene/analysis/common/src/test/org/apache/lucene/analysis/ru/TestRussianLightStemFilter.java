@@ -37,8 +37,7 @@ import static org.apache.lucene.analysis.VocabularyAssert.*;
 public class TestRussianLightStemFilter extends BaseTokenStreamTestCase {
   private Analyzer analyzer = new Analyzer() {
     @Override
-    protected TokenStreamComponents createComponents(String fieldName,
-        Reader reader) {
+    protected TokenStreamComponents createComponents(String fieldName) {
       Tokenizer source = new MockTokenizer(MockTokenizer.WHITESPACE, false);
       return new TokenStreamComponents(source, new RussianLightStemFilter(source));
     }

@@ -41,9 +41,8 @@ import static org.apache.lucene.analysis.no.NorwegianLightStemmer.NYNORSK;
 public class TestNorwegianMinimalStemFilter extends BaseTokenStreamTestCase {
   private Analyzer analyzer = new Analyzer() {
     @Override
-    protected TokenStreamComponents createComponents(String fieldName,
-        Reader reader) {
-      Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+    protected TokenStreamComponents createComponents(String fieldName) {
+      Tokenizer source = new MockTokenizer(MockTokenizer.WHITESPACE, false);
       return new TokenStreamComponents(source, new NorwegianMinimalStemFilter(source, BOKMAAL));
     }
   };
@@ -58,7 +57,7 @@ public class TestNorwegianMinimalStemFilter extends BaseTokenStreamTestCase {
     Analyzer analyzer = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer source = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(source, new NorwegianMinimalStemFilter(source, NYNORSK));
       }
     };
@@ -70,7 +69,7 @@ public class TestNorwegianMinimalStemFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer source = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         TokenStream sink = new SetKeywordMarkerFilter(source, exclusionSet);
         return new TokenStreamComponents(source, new NorwegianMinimalStemFilter(sink));
       }
@@ -88,7 +87,7 @@ public class TestNorwegianMinimalStemFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new NorwegianMinimalStemFilter(tokenizer));
       }
     };

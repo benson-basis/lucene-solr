@@ -17,8 +17,6 @@
 
 package org.apache.lucene.analysis.miscellaneous;
 
-import java.io.Reader;
-import java.io.StringReader;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,12 +39,12 @@ public class TestKeepWordFilter extends BaseTokenStreamTestCase {
     String input = "xxx yyy aaa zzz BBB ccc ddd EEE";
     
     // Test Stopwords
-    TokenStream stream = new MockTokenizer(new StringReader(input), MockTokenizer.WHITESPACE, false);
+    TokenStream stream = whitespaceMockTokenizer(input);
     stream = new KeepWordFilter(TEST_VERSION_CURRENT, stream, new CharArraySet(TEST_VERSION_CURRENT, words, true));
     assertTokenStreamContents(stream, new String[] { "aaa", "BBB" }, new int[] { 3, 2 });
        
     // Now force case
-    stream = new MockTokenizer(new StringReader(input), MockTokenizer.WHITESPACE, false);
+    stream = whitespaceMockTokenizer(input);
     stream = new KeepWordFilter(TEST_VERSION_CURRENT, stream, new CharArraySet(TEST_VERSION_CURRENT,words, false));
     assertTokenStreamContents(stream, new String[] { "aaa" }, new int[] { 3 });
   }
@@ -61,7 +59,7 @@ public class TestKeepWordFilter extends BaseTokenStreamTestCase {
 
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         TokenStream stream = new KeepWordFilter(TEST_VERSION_CURRENT, tokenizer, new CharArraySet(TEST_VERSION_CURRENT, words, true));
         return new TokenStreamComponents(tokenizer, stream);
       }

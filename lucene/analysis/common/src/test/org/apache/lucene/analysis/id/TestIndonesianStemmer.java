@@ -33,7 +33,7 @@ public class TestIndonesianStemmer extends BaseTokenStreamTestCase {
   Analyzer a = new Analyzer() {
     @Override
     public TokenStreamComponents createComponents(String fieldName) {
-      Tokenizer tokenizer = new KeywordTokenizer(reader);
+      Tokenizer tokenizer = new KeywordTokenizer();
       return new TokenStreamComponents(tokenizer, new IndonesianStemFilter(tokenizer));
     }
   };
@@ -114,7 +114,7 @@ public class TestIndonesianStemmer extends BaseTokenStreamTestCase {
   Analyzer b = new Analyzer() {
     @Override
     public TokenStreamComponents createComponents(String fieldName) {
-      Tokenizer tokenizer = new KeywordTokenizer(reader);
+      Tokenizer tokenizer = new KeywordTokenizer();
       return new TokenStreamComponents(tokenizer, new IndonesianStemFilter(tokenizer, false));
     }
   };
@@ -137,7 +137,7 @@ public class TestIndonesianStemmer extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new IndonesianStemFilter(tokenizer));
       }
     };

@@ -27,7 +27,7 @@ public class TestPersianCharFilter extends BaseTokenStreamTestCase {
   private Analyzer analyzer = new Analyzer() {
     @Override
     protected TokenStreamComponents createComponents(String fieldName) {
-      return new TokenStreamComponents(new MockTokenizer(reader));
+      return new TokenStreamComponents(new MockTokenizer());
     }
 
     @Override

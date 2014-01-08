@@ -71,7 +71,7 @@ public class TestDuelingAnalyzers extends LuceneTestCase {
     Analyzer right = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT, reader);
+        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT);
         return new TokenStreamComponents(tokenizer, tokenizer);
       }
     };
@@ -91,7 +91,7 @@ public class TestDuelingAnalyzers extends LuceneTestCase {
     Analyzer right = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT, reader);
+        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT);
         return new TokenStreamComponents(tokenizer, tokenizer);
       }
     };
@@ -109,7 +109,7 @@ public class TestDuelingAnalyzers extends LuceneTestCase {
     Analyzer right = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT, reader);
+        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT);
         return new TokenStreamComponents(tokenizer, tokenizer);
       }
     };
@@ -128,7 +128,7 @@ public class TestDuelingAnalyzers extends LuceneTestCase {
     Analyzer right = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT, reader);
+        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT);
         return new TokenStreamComponents(tokenizer, tokenizer);
       }
     };
@@ -146,7 +146,7 @@ public class TestDuelingAnalyzers extends LuceneTestCase {
     Analyzer right = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT, reader);
+        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT);
         return new TokenStreamComponents(tokenizer, tokenizer);
       }
     };
@@ -165,7 +165,7 @@ public class TestDuelingAnalyzers extends LuceneTestCase {
     Analyzer right = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT, reader);
+        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT);
         return new TokenStreamComponents(tokenizer, tokenizer);
       }
     };

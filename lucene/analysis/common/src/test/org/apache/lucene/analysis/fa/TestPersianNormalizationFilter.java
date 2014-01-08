@@ -58,7 +58,7 @@ public class TestPersianNormalizationFilter extends BaseTokenStreamTestCase {
   }
 
   private void check(final String input, final String expected) throws IOException {
-    MockTokenizer tokenStream = new MockTokenizer(new StringReader(input), MockTokenizer.WHITESPACE, false);
+    MockTokenizer tokenStream = whitespaceMockTokenizer(input);
     PersianNormalizationFilter filter = new PersianNormalizationFilter(
         tokenStream);
     assertTokenStreamContents(filter, new String[]{expected});
@@ -68,7 +68,7 @@ public class TestPersianNormalizationFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new PersianNormalizationFilter(tokenizer));
       }
     };

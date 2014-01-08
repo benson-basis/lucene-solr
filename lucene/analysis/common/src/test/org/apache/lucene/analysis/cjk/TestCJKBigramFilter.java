@@ -119,7 +119,7 @@ public class TestCJKBigramFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer t = new StandardTokenizer(TEST_VERSION_CURRENT, reader);
+        Tokenizer t = new StandardTokenizer(TEST_VERSION_CURRENT);
         return new TokenStreamComponents(t, new CJKBigramFilter(t, CJKBigramFilter.HAN, true));
       }
     };

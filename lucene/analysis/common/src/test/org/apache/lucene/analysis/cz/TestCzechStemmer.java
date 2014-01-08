@@ -281,8 +281,10 @@ public class TestCzechStemmer extends BaseTokenStreamTestCase {
   public void testWithKeywordAttribute() throws IOException {
     CharArraySet set = new CharArraySet(TEST_VERSION_CURRENT, 1, true);
     set.add("hole");
+    final MockTokenizer in = new MockTokenizer(MockTokenizer.WHITESPACE, false);
+    in.setReader(new StringReader("hole desek"));
     CzechStemFilter filter = new CzechStemFilter(new SetKeywordMarkerFilter(
-        new MockTokenizer(new StringReader("hole desek"), MockTokenizer.WHITESPACE, false), set));
+        in, set));
     assertTokenStreamContents(filter, new String[] { "hole", "desk" });
   }
   
@@ -290,7 +292,7 @@ public class TestCzechStemmer extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new CzechStemFilter(tokenizer));
       }
     };

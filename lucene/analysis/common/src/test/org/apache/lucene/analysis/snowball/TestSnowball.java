@@ -18,16 +18,14 @@ package org.apache.lucene.analysis.snowball;
  */
 
 import java.io.IOException;
-import java.io.Reader;
 
 import org.apache.lucene.analysis.BaseTokenStreamTestCase;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.MockTokenizer;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.Analyzer.TokenStreamComponents;
 import org.apache.lucene.analysis.core.KeywordTokenizer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.FlagsAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
@@ -35,7 +33,7 @@ import org.apache.lucene.analysis.tokenattributes.PayloadAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 import org.apache.lucene.util.BytesRef;
-import org.apache.lucene.util.Version;
+
 
 public class TestSnowball extends BaseTokenStreamTestCase {
 
@@ -43,7 +41,7 @@ public class TestSnowball extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new MockTokenizer(reader);
+        Tokenizer tokenizer = new MockTokenizer();
         return new TokenStreamComponents(tokenizer, new SnowballFilter(tokenizer, "English"));
       }
     };
@@ -110,7 +108,7 @@ public class TestSnowball extends BaseTokenStreamTestCase {
       Analyzer a = new Analyzer() {
         @Override
         protected TokenStreamComponents createComponents(String fieldName) {
-          Tokenizer tokenizer = new KeywordTokenizer(reader);
+          Tokenizer tokenizer = new KeywordTokenizer();
           return new TokenStreamComponents(tokenizer, new SnowballFilter(tokenizer, lang));
         }
       };
@@ -128,7 +126,7 @@ public class TestSnowball extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer t = new MockTokenizer(reader);
+        Tokenizer t = new MockTokenizer();
         return new TokenStreamComponents(t, new SnowballFilter(t, snowballLanguage));
       }  
     };

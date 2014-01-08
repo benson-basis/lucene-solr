@@ -18,7 +18,6 @@ package org.apache.lucene.analysis.cjk;
  */
 
 import java.io.IOException;
-import java.io.Reader;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.BaseTokenStreamTestCase;
@@ -33,7 +32,7 @@ public class TestCJKWidthFilter extends BaseTokenStreamTestCase {
   private Analyzer analyzer = new Analyzer() {
     @Override
     protected TokenStreamComponents createComponents(String fieldName) {
-      Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+      Tokenizer source = new MockTokenizer(MockTokenizer.WHITESPACE, false);
       return new TokenStreamComponents(source, new CJKWidthFilter(source));
     }
   };
@@ -70,7 +69,7 @@ public class TestCJKWidthFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new CJKWidthFilter(tokenizer));
       }
     };

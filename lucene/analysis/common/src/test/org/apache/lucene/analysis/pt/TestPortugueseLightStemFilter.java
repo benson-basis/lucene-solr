@@ -40,9 +40,8 @@ import static org.apache.lucene.analysis.VocabularyAssert.*;
 public class TestPortugueseLightStemFilter extends BaseTokenStreamTestCase {
   private Analyzer analyzer = new Analyzer() {
     @Override
-    protected TokenStreamComponents createComponents(String fieldName,
-        Reader reader) {
-      Tokenizer source = new StandardTokenizer(TEST_VERSION_CURRENT, reader);
+    protected TokenStreamComponents createComponents(String fieldName) {
+      Tokenizer source = new StandardTokenizer(TEST_VERSION_CURRENT);
       TokenStream result = new LowerCaseFilter(TEST_VERSION_CURRENT, source);
       return new TokenStreamComponents(source, new PortugueseLightStemFilter(result));
     }
@@ -102,7 +101,7 @@ public class TestPortugueseLightStemFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer source = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         TokenStream sink = new SetKeywordMarkerFilter(source, exclusionSet);
         return new TokenStreamComponents(source, new PortugueseLightStemFilter(sink));
       }
@@ -119,7 +118,7 @@ public class TestPortugueseLightStemFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new PortugueseLightStemFilter(tokenizer));
       }
     };

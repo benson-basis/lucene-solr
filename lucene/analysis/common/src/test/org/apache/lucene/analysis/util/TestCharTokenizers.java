@@ -53,7 +53,8 @@ public class TestCharTokenizers extends BaseTokenStreamTestCase {
     }
     // internal buffer size is 1024 make sure we have a surrogate pair right at the border
     builder.insert(1023, "\ud801\udc1c");
-    Tokenizer tokenizer = new LowerCaseTokenizer(TEST_VERSION_CURRENT, new StringReader(builder.toString()));
+    Tokenizer tokenizer = new LowerCaseTokenizer(TEST_VERSION_CURRENT);
+    tokenizer.setReader(new StringReader(builder.toString()));
     assertTokenStreamContents(tokenizer, builder.toString().toLowerCase(Locale.ROOT).split(" "));
   }
   
@@ -70,7 +71,8 @@ public class TestCharTokenizers extends BaseTokenStreamTestCase {
         builder.append("a");
       }
       builder.append("\ud801\udc1cabc");
-      Tokenizer tokenizer = new LowerCaseTokenizer(TEST_VERSION_CURRENT, new StringReader(builder.toString()));
+      Tokenizer tokenizer = new LowerCaseTokenizer(TEST_VERSION_CURRENT);
+      tokenizer.setReader(new StringReader(builder.toString()));
       assertTokenStreamContents(tokenizer, new String[] {builder.toString().toLowerCase(Locale.ROOT)});
     }
   }
@@ -84,7 +86,8 @@ public class TestCharTokenizers extends BaseTokenStreamTestCase {
     for (int i = 0; i < 255; i++) {
       builder.append("A");
     }
-    Tokenizer tokenizer = new LowerCaseTokenizer(TEST_VERSION_CURRENT, new StringReader(builder.toString() + builder.toString()));
+    Tokenizer tokenizer = new LowerCaseTokenizer(TEST_VERSION_CURRENT);
+    tokenizer.setReader(new StringReader(builder.toString() + builder.toString()));
     assertTokenStreamContents(tokenizer, new String[] {builder.toString().toLowerCase(Locale.ROOT), builder.toString().toLowerCase(Locale.ROOT)});
   }
   
@@ -98,7 +101,8 @@ public class TestCharTokenizers extends BaseTokenStreamTestCase {
       builder.append("A");
     }
     builder.append("\ud801\udc1c");
-    Tokenizer tokenizer = new LowerCaseTokenizer(TEST_VERSION_CURRENT, new StringReader(builder.toString() + builder.toString()));
+    Tokenizer tokenizer = new LowerCaseTokenizer(TEST_VERSION_CURRENT);
+    tokenizer.setReader(new StringReader(builder.toString() + builder.toString()));
     assertTokenStreamContents(tokenizer, new String[] {builder.toString().toLowerCase(Locale.ROOT), builder.toString().toLowerCase(Locale.ROOT)});
   }
   
@@ -107,7 +111,7 @@ public class TestCharTokenizers extends BaseTokenStreamTestCase {
     Analyzer analyzer = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT, reader) {
+        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT) {
           @Override
           protected int normalize(int c) {
             if (c > 0xffff) {
@@ -145,7 +149,7 @@ public class TestCharTokenizers extends BaseTokenStreamTestCase {
     Analyzer analyzer = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT, reader) {
+        Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT) {
           @Override
           protected int normalize(int c) {
             if (c <= 0xffff) {

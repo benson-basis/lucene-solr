@@ -36,7 +36,7 @@ public class TestGalicianMinimalStemFilter extends BaseTokenStreamTestCase {
   Analyzer a = new Analyzer() {
     @Override
     protected TokenStreamComponents createComponents(String fieldName) {
-      Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+      Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
       return new TokenStreamComponents(tokenizer, new GalicianMinimalStemFilter(tokenizer));
     }
   };
@@ -58,7 +58,7 @@ public class TestGalicianMinimalStemFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer source = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         TokenStream sink = new SetKeywordMarkerFilter(source, exclusionSet);
         return new TokenStreamComponents(source, new GalicianMinimalStemFilter(sink));
       }
@@ -75,7 +75,7 @@ public class TestGalicianMinimalStemFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new GalicianMinimalStemFilter(tokenizer));
       }
     };

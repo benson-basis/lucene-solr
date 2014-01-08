@@ -40,8 +40,7 @@ import static org.apache.lucene.analysis.VocabularyAssert.*;
 public class TestPortugueseMinimalStemFilter extends BaseTokenStreamTestCase {
   private Analyzer analyzer = new Analyzer() {
     @Override
-    protected TokenStreamComponents createComponents(String fieldName,
-        Reader reader) {
+    protected TokenStreamComponents createComponents(String fieldName) {
       Tokenizer source = new StandardTokenizer(TEST_VERSION_CURRENT);
       TokenStream result = new LowerCaseFilter(TEST_VERSION_CURRENT, source);
       return new TokenStreamComponents(source, new PortugueseMinimalStemFilter(result));
