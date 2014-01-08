@@ -106,7 +106,7 @@ public final class ClassicAnalyzer extends StopwordAnalyzerBase {
   }
 
   @Override
-  protected TokenStreamComponents createComponents(final String fieldName, final Reader reader) {
+  protected TokenStreamComponents createComponents(final String fieldName) {
     final ClassicTokenizer src = new ClassicTokenizer(matchVersion);
     src.setMaxTokenLength(maxTokenLength);
     TokenStream tok = new ClassicFilter(src);

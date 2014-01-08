@@ -116,8 +116,7 @@ public final class HindiAnalyzer extends StopwordAnalyzerBase {
    *         Hindi Stop words
    */
   @Override
-  protected TokenStreamComponents createComponents(String fieldName,
-      Reader reader) {
+  protected TokenStreamComponents createComponents(String fieldName) {
     final Tokenizer source = new StandardTokenizer(matchVersion);
     TokenStream result = new LowerCaseFilter(matchVersion, source);
     if (!stemExclusionSet.isEmpty())

@@ -101,8 +101,7 @@ public final class StopAnalyzer extends StopwordAnalyzerBase {
    *         {@link StopFilter}
    */
   @Override
-  protected TokenStreamComponents createComponents(String fieldName,
-      Reader reader) {
+  protected TokenStreamComponents createComponents(String fieldName) {
     final Tokenizer source = new LowerCaseTokenizer(matchVersion);
     return new TokenStreamComponents(source, new StopFilter(matchVersion,
           source, stopwords));

@@ -124,8 +124,7 @@ public final class BrazilianAnalyzer extends StopwordAnalyzerBase {
    *         , and {@link BrazilianStemFilter}.
    */
   @Override
-  protected TokenStreamComponents createComponents(String fieldName,
-      Reader reader) {
+  protected TokenStreamComponents createComponents(String fieldName) {
     Tokenizer source = new StandardTokenizer(matchVersion);
     TokenStream result = new LowerCaseFilter(matchVersion, source);
     result = new StandardFilter(matchVersion, result);

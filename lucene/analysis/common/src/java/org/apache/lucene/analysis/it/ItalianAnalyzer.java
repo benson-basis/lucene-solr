@@ -126,8 +126,7 @@ public final class ItalianAnalyzer extends StopwordAnalyzerBase {
    *         provided and {@link ItalianLightStemFilter}.
    */
   @Override
-  protected TokenStreamComponents createComponents(String fieldName,
-      Reader reader) {
+  protected TokenStreamComponents createComponents(String fieldName) {
     final Tokenizer source = new StandardTokenizer(matchVersion);
     TokenStream result = new StandardFilter(matchVersion, source);
     result = new ElisionFilter(result, DEFAULT_ARTICLES);

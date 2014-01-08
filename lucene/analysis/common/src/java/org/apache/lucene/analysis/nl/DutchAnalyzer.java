@@ -155,8 +155,7 @@ public final class DutchAnalyzer extends Analyzer {
    *   {@link StemmerOverrideFilter}, and {@link SnowballFilter}
    */
   @Override
-  protected TokenStreamComponents createComponents(String fieldName,
-      Reader aReader) {
+  protected TokenStreamComponents createComponents(String fieldName) {
     final Tokenizer source = new StandardTokenizer(matchVersion);
     TokenStream result = new StandardFilter(matchVersion, source);
     result = new LowerCaseFilter(matchVersion, result);

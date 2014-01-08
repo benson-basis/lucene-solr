@@ -87,8 +87,7 @@ public final class CollationKeyAnalyzer extends Analyzer {
   }
 
   @Override
-  protected TokenStreamComponents createComponents(String fieldName,
-      Reader reader) {
+  protected TokenStreamComponents createComponents(String fieldName) {
     KeywordTokenizer tokenizer = new KeywordTokenizer(factory, KeywordTokenizer.DEFAULT_BUFFER_SIZE);
     return new TokenStreamComponents(tokenizer, tokenizer);
   }

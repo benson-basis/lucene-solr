@@ -119,8 +119,7 @@ public final class CzechAnalyzer extends StopwordAnalyzerBase {
    *         {@link CzechStemFilter}.
    */
   @Override
-  protected TokenStreamComponents createComponents(String fieldName,
-      Reader reader) {
+  protected TokenStreamComponents createComponents(String fieldName) {
     final Tokenizer source = new StandardTokenizer(matchVersion);
     TokenStream result = new StandardFilter(matchVersion, source);
     result = new LowerCaseFilter(matchVersion, result);

@@ -115,8 +115,7 @@ public final class IndonesianAnalyzer extends StopwordAnalyzerBase {
    *         if a stem exclusion set is provided and {@link IndonesianStemFilter}.
    */
   @Override
-  protected TokenStreamComponents createComponents(String fieldName,
-      Reader reader) {
+  protected TokenStreamComponents createComponents(String fieldName) {
     final Tokenizer source = new StandardTokenizer(matchVersion);
     TokenStream result = new StandardFilter(matchVersion, source);
     result = new LowerCaseFilter(matchVersion, result);
