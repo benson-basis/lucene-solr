@@ -128,7 +128,7 @@ public class TestPatternTokenizer extends BaseTokenStreamTestCase
   public void testRandomStrings() throws Exception {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new PatternTokenizer(reader, Pattern.compile("a"), -1);
         return new TokenStreamComponents(tokenizer);
       }    
@@ -137,7 +137,7 @@ public class TestPatternTokenizer extends BaseTokenStreamTestCase
     
     Analyzer b = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new PatternTokenizer(reader, Pattern.compile("a"), 0);
         return new TokenStreamComponents(tokenizer);
       }    

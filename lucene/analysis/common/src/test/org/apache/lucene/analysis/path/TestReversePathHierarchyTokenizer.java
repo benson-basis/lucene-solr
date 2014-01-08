@@ -164,7 +164,7 @@ public class TestReversePathHierarchyTokenizer extends BaseTokenStreamTestCase {
   public void testRandomStrings() throws Exception {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new ReversePathHierarchyTokenizer(reader);
         return new TokenStreamComponents(tokenizer, tokenizer);
       }    
@@ -177,7 +177,7 @@ public class TestReversePathHierarchyTokenizer extends BaseTokenStreamTestCase {
     Random random = random();
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new ReversePathHierarchyTokenizer(reader);
         return new TokenStreamComponents(tokenizer, tokenizer);
       }    

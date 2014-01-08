@@ -101,7 +101,7 @@ public class TestPortugueseLightStemFilter extends BaseTokenStreamTestCase {
     final CharArraySet exclusionSet = new CharArraySet(TEST_VERSION_CURRENT, asSet("quilométricas"), false);
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         TokenStream sink = new SetKeywordMarkerFilter(source, exclusionSet);
         return new TokenStreamComponents(source, new PortugueseLightStemFilter(sink));
@@ -118,7 +118,7 @@ public class TestPortugueseLightStemFilter extends BaseTokenStreamTestCase {
   public void testEmptyTerm() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer, new PortugueseLightStemFilter(tokenizer));
       }

@@ -48,7 +48,7 @@ public class TestMultiPhraseQueryParsing extends LuceneTestCase {
     }
 
     @Override
-    public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    public TokenStreamComponents createComponents(String fieldName) {
       return new TokenStreamComponents(new CannedTokenizer(tokens));
     }
   }

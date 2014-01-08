@@ -39,7 +39,7 @@ public final class UIMATypeAwareAnalyzer extends Analyzer {
   }
 
   @Override
-  protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+  protected TokenStreamComponents createComponents(String fieldName) {
     return new TokenStreamComponents(new UIMATypeAwareAnnotationsTokenizer(descriptorPath, tokenType, featurePath, configurationParameters, reader));
   }
 }

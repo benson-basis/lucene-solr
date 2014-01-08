@@ -106,7 +106,7 @@ public class TestCharTokenizers extends BaseTokenStreamTestCase {
   public void testCrossPlaneNormalization() throws IOException {
     Analyzer analyzer = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT, reader) {
           @Override
           protected int normalize(int c) {
@@ -144,7 +144,7 @@ public class TestCharTokenizers extends BaseTokenStreamTestCase {
   public void testCrossPlaneNormalization2() throws IOException {
     Analyzer analyzer = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new LetterTokenizer(TEST_VERSION_CURRENT, reader) {
           @Override
           protected int normalize(int c) {

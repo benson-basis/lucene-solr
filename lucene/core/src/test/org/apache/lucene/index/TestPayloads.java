@@ -376,7 +376,7 @@ public class TestPayloads extends LuceneTestCase {
         }
         
         @Override
-        public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        public TokenStreamComponents createComponents(String fieldName) {
             PayloadData payload =  fieldToData.get(fieldName);
             Tokenizer ts = new MockTokenizer(MockTokenizer.WHITESPACE, false);
             TokenStream tokenStream = (payload != null) ?

@@ -1106,7 +1106,7 @@ public class ShingleFilterTest extends BaseTokenStreamTestCase {
   public void testRandomStrings() throws Exception {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new ShingleFilter(tokenizer));
       }
@@ -1119,7 +1119,7 @@ public class ShingleFilterTest extends BaseTokenStreamTestCase {
     Random random = random();
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new ShingleFilter(tokenizer));
       }
@@ -1130,7 +1130,7 @@ public class ShingleFilterTest extends BaseTokenStreamTestCase {
   public void testEmptyTerm() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new ShingleFilter(tokenizer));
       }

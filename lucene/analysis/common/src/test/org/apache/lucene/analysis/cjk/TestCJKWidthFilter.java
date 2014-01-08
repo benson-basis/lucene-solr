@@ -32,7 +32,7 @@ import org.apache.lucene.analysis.core.KeywordTokenizer;
 public class TestCJKWidthFilter extends BaseTokenStreamTestCase {
   private Analyzer analyzer = new Analyzer() {
     @Override
-    protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    protected TokenStreamComponents createComponents(String fieldName) {
       Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
       return new TokenStreamComponents(source, new CJKWidthFilter(source));
     }
@@ -69,7 +69,7 @@ public class TestCJKWidthFilter extends BaseTokenStreamTestCase {
   public void testEmptyTerm() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer, new CJKWidthFilter(tokenizer));
       }

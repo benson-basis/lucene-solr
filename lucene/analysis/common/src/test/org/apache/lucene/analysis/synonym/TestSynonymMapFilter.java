@@ -151,7 +151,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
 
     final Analyzer analyzer = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
         return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, false));
       }
@@ -176,7 +176,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
 
     final Analyzer analyzer = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
         return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, false));
       }
@@ -495,7 +495,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
       
       final Analyzer analyzer = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
           return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, ignoreCase));
         }
@@ -524,7 +524,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
       
       final Analyzer analyzer = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
           TokenStream graph = new MockGraphTokenFilter(random(), tokenizer);
           return new TokenStreamComponents(tokenizer, new SynonymFilter(graph, map, ignoreCase));
@@ -551,7 +551,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
       
       final Analyzer analyzer = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
           TokenStream syns = new SynonymFilter(tokenizer, map, ignoreCase);
           TokenStream graph = new MockGraphTokenFilter(random(), syns);
@@ -577,7 +577,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
       
       final Analyzer analyzer = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new KeywordTokenizer();
           return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, ignoreCase));
         }
@@ -606,7 +606,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
       
       final Analyzer analyzer = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
           return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, ignoreCase));
         }
@@ -628,7 +628,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
       
     Analyzer analyzer = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, true);
         return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, true));
       }
@@ -687,7 +687,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
     final SynonymMap map = b.build();
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, true));
       }
@@ -727,7 +727,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
     final SynonymMap map = b.build();
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, true));
       }
@@ -747,7 +747,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
     final SynonymMap map = b.build();
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, true));
       }
@@ -765,7 +765,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
     final SynonymMap map = b.build();
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, true));
       }
@@ -784,7 +784,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
     final SynonymMap map = b.build();
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, true));
       }
@@ -833,7 +833,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
     final SynonymMap map = b.build();
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, true));
       }
@@ -878,7 +878,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
     final SynonymMap map = b.build();
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, true));
       }
@@ -897,7 +897,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
     final SynonymMap map = b.build();
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, true));
       }
@@ -915,7 +915,7 @@ public class TestSynonymMapFilter extends BaseTokenStreamTestCase {
     final SynonymMap map = b.build();
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new SynonymFilter(tokenizer, map, true));
       }

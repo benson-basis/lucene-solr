@@ -78,7 +78,7 @@ public class TestTurkishLowerCaseFilter extends BaseTokenStreamTestCase {
   public void testEmptyTerm() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer, new TurkishLowerCaseFilter(tokenizer));
       }

@@ -93,7 +93,7 @@ public class TestICUTransformFilter extends BaseTokenStreamTestCase {
     final Transliterator transform = Transliterator.getInstance("Any-Latin");
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new ICUTransformFilter(tokenizer, transform));
       }
@@ -104,7 +104,7 @@ public class TestICUTransformFilter extends BaseTokenStreamTestCase {
   public void testEmptyTerm() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer, new ICUTransformFilter(tokenizer, Transliterator.getInstance("Any-Latin")));
       }

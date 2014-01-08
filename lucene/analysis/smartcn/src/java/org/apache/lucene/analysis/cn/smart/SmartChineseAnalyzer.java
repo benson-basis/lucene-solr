@@ -136,7 +136,7 @@ public final class SmartChineseAnalyzer extends Analyzer {
   }
 
   @Override
-  public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+  public TokenStreamComponents createComponents(String fieldName) {
     Tokenizer tokenizer = new SentenceTokenizer(reader);
     TokenStream result = new WordTokenFilter(tokenizer);
     // result = new LowerCaseFilter(result);

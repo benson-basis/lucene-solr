@@ -81,7 +81,7 @@ public class TestPhoneticFilter extends BaseTokenStreamTestCase {
     for (final Encoder e : encoders) {
       Analyzer a = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
           return new TokenStreamComponents(tokenizer, new PhoneticFilter(tokenizer, e, false));
         }   
@@ -91,7 +91,7 @@ public class TestPhoneticFilter extends BaseTokenStreamTestCase {
       
       Analyzer b = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
           return new TokenStreamComponents(tokenizer, new PhoneticFilter(tokenizer, e, false));
         }   
@@ -108,7 +108,7 @@ public class TestPhoneticFilter extends BaseTokenStreamTestCase {
     for (final Encoder e : encoders) {
       Analyzer a = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new KeywordTokenizer(reader);
           return new TokenStreamComponents(tokenizer, new PhoneticFilter(tokenizer, e, random().nextBoolean()));
         }

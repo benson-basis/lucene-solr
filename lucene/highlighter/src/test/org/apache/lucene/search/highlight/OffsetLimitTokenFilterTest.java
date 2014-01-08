@@ -50,7 +50,7 @@ public class OffsetLimitTokenFilterTest extends BaseTokenStreamTestCase {
     checkOneTerm(new Analyzer() {
       
       @Override
-      public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      public TokenStreamComponents createComponents(String fieldName) {
         MockTokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         tokenizer.setEnableChecks(false);
         return new TokenStreamComponents(tokenizer, new OffsetLimitTokenFilter(tokenizer, 10));

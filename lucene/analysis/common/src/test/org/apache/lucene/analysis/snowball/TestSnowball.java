@@ -42,7 +42,7 @@ public class TestSnowball extends BaseTokenStreamTestCase {
   public void testEnglish() throws Exception {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader);
         return new TokenStreamComponents(tokenizer, new SnowballFilter(tokenizer, "English"));
       }
@@ -109,7 +109,7 @@ public class TestSnowball extends BaseTokenStreamTestCase {
     for (final String lang : SNOWBALL_LANGS) {
       Analyzer a = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new KeywordTokenizer(reader);
           return new TokenStreamComponents(tokenizer, new SnowballFilter(tokenizer, lang));
         }
@@ -127,7 +127,7 @@ public class TestSnowball extends BaseTokenStreamTestCase {
   public void checkRandomStrings(final String snowballLanguage) throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer t = new MockTokenizer(reader);
         return new TokenStreamComponents(t, new SnowballFilter(t, snowballLanguage));
       }  

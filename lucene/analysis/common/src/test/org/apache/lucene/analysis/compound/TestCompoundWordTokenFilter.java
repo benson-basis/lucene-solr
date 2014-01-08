@@ -324,7 +324,7 @@ public class TestCompoundWordTokenFilter extends BaseTokenStreamTestCase {
     Analyzer analyzer = new Analyzer() {
 
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         TokenFilter filter = new DictionaryCompoundWordTokenFilter(TEST_VERSION_CURRENT, tokenizer, dict);
         return new TokenStreamComponents(tokenizer, filter);
@@ -348,7 +348,7 @@ public class TestCompoundWordTokenFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
 
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new DictionaryCompoundWordTokenFilter(TEST_VERSION_CURRENT, tokenizer, dict));
       }
@@ -360,7 +360,7 @@ public class TestCompoundWordTokenFilter extends BaseTokenStreamTestCase {
     Analyzer b = new Analyzer() {
 
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         TokenFilter filter = new HyphenationCompoundWordTokenFilter(TEST_VERSION_CURRENT, tokenizer, hyphenator);
         return new TokenStreamComponents(tokenizer, filter);
@@ -374,7 +374,7 @@ public class TestCompoundWordTokenFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
 
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer, new DictionaryCompoundWordTokenFilter(TEST_VERSION_CURRENT, tokenizer, dict));
       }
@@ -386,7 +386,7 @@ public class TestCompoundWordTokenFilter extends BaseTokenStreamTestCase {
     Analyzer b = new Analyzer() {
 
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         TokenFilter filter = new HyphenationCompoundWordTokenFilter(TEST_VERSION_CURRENT, tokenizer, hyphenator);
         return new TokenStreamComponents(tokenizer, filter);

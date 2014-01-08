@@ -56,7 +56,7 @@ public class TestBugInSomething extends BaseTokenStreamTestCase {
     
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer t = new MockTokenizer(new TestRandomChains.CheckThatYouDidntReadAnythingReaderWrapper(reader), MockTokenFilter.ENGLISH_STOPSET, false, -65);
         TokenFilter f = new CommonGramsFilter(TEST_VERSION_CURRENT, t, cas);
         return new TokenStreamComponents(t, f);
@@ -244,7 +244,7 @@ public class TestBugInSomething extends BaseTokenStreamTestCase {
   public void testUnicodeShinglesAndNgrams() throws Exception {
     Analyzer analyzer = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new EdgeNGramTokenizer(TEST_VERSION_CURRENT, reader, 2, 94);
         //TokenStream stream = new SopTokenFilter(tokenizer);
         TokenStream stream = new ShingleFilter(tokenizer, 5);

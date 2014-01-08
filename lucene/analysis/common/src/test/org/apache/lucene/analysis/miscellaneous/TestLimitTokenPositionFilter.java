@@ -34,7 +34,7 @@ public class TestLimitTokenPositionFilter extends BaseTokenStreamTestCase {
     for (final boolean consumeAll : new boolean[] { true, false }) {
       Analyzer a = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           MockTokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
           // if we are consuming all tokens, we can use the checks, otherwise we can't
           tokenizer.setEnableChecks(consumeAll);

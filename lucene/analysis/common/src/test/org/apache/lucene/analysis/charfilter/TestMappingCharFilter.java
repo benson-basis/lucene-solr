@@ -203,7 +203,7 @@ public class TestMappingCharFilter extends BaseTokenStreamTestCase {
     Analyzer analyzer = new Analyzer() {
 
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, tokenizer);
       }
@@ -229,7 +229,7 @@ public class TestMappingCharFilter extends BaseTokenStreamTestCase {
 
     Analyzer analyzer = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, tokenizer);
       }
@@ -251,7 +251,7 @@ public class TestMappingCharFilter extends BaseTokenStreamTestCase {
       final NormalizeCharMap map = randomMap();
       Analyzer analyzer = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
           return new TokenStreamComponents(tokenizer, tokenizer);
         }

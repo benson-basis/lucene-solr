@@ -175,7 +175,7 @@ public class EdgeNGramTokenFilterTest extends BaseTokenStreamTestCase {
     
       Analyzer a = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
           return new TokenStreamComponents(tokenizer, 
             new EdgeNGramTokenFilter(TEST_VERSION_CURRENT, tokenizer, min, max));
@@ -189,7 +189,7 @@ public class EdgeNGramTokenFilterTest extends BaseTokenStreamTestCase {
     Random random = random();
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer, 
             new EdgeNGramTokenFilter(TEST_VERSION_CURRENT, tokenizer, 2, 15));

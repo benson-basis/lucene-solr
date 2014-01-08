@@ -60,7 +60,7 @@ public class TestKeepWordFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
 
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         TokenStream stream = new KeepWordFilter(TEST_VERSION_CURRENT, tokenizer, new CharArraySet(TEST_VERSION_CURRENT, words, true));
         return new TokenStreamComponents(tokenizer, stream);

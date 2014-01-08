@@ -38,7 +38,7 @@ public class HTMLStripCharFilterTest extends BaseTokenStreamTestCase {
   static private Analyzer newTestAnalyzer() {
     return new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, tokenizer);
       }

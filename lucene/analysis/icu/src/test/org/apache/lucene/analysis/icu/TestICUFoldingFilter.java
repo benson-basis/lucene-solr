@@ -29,7 +29,7 @@ import org.apache.lucene.analysis.core.KeywordTokenizer;
 public class TestICUFoldingFilter extends BaseTokenStreamTestCase {
   Analyzer a = new Analyzer() {
     @Override
-    public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    public TokenStreamComponents createComponents(String fieldName) {
       Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
       return new TokenStreamComponents(tokenizer, new ICUFoldingFilter(tokenizer));
     }
@@ -82,7 +82,7 @@ public class TestICUFoldingFilter extends BaseTokenStreamTestCase {
   public void testEmptyTerm() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer, new ICUFoldingFilter(tokenizer));
       }

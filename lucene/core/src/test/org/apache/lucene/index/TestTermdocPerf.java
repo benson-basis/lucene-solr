@@ -80,7 +80,7 @@ public class TestTermdocPerf extends LuceneTestCase {
 
     Analyzer analyzer = new Analyzer() {
       @Override
-      public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      public TokenStreamComponents createComponents(String fieldName) {
         return new TokenStreamComponents(new RepeatingTokenizer(val, random, percentDocs, maxTF));
       }
     };

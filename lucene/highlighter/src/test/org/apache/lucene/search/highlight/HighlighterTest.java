@@ -1954,7 +1954,7 @@ final class SynonymAnalyzer extends Analyzer {
    *      java.io.Reader)
    */
   @Override
-  public TokenStreamComponents createComponents(String arg0, Reader arg1) {
+  public TokenStreamComponents createComponents(String arg0) {
     Tokenizer stream = new MockTokenizer(MockTokenizer.SIMPLE, true);
     stream.addAttribute(CharTermAttribute.class);
     stream.addAttribute(PositionIncrementAttribute.class);

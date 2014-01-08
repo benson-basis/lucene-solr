@@ -58,7 +58,7 @@ public class TestPositionIncrement extends LuceneTestCase {
   public void testSetPosition() throws Exception {
     Analyzer analyzer = new Analyzer() {
       @Override
-      public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      public TokenStreamComponents createComponents(String fieldName) {
         return new TokenStreamComponents(new Tokenizer() {
           // TODO: use CannedTokenStream
           private final String[] TOKENS = {"1", "2", "3", "4", "5"};

@@ -68,7 +68,7 @@ public class TestPayloadTermQuery extends LuceneTestCase {
     }
 
     @Override
-    public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    public TokenStreamComponents createComponents(String fieldName) {
       Tokenizer result = new MockTokenizer(MockTokenizer.SIMPLE, true);
       return new TokenStreamComponents(result, new PayloadFilter(result, fieldName));
     }

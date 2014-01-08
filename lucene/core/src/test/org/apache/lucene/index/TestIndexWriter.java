@@ -1604,7 +1604,7 @@ public class TestIndexWriter extends LuceneTestCase {
 
   static final class StringSplitAnalyzer extends Analyzer {
     @Override
-    public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    public TokenStreamComponents createComponents(String fieldName) {
       return new TokenStreamComponents(new StringSplitTokenizer());
     }
   }
@@ -1882,7 +1882,7 @@ public class TestIndexWriter extends LuceneTestCase {
   public void testDontInvokeAnalyzerForUnAnalyzedFields() throws Exception {
     Analyzer analyzer = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         throw new IllegalStateException("don't invoke me!");
       }
 
@@ -1943,7 +1943,7 @@ public class TestIndexWriter extends LuceneTestCase {
     Directory dir = newDirectory();
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer();
         TokenStream stream = new MockTokenFilter(tokenizer, MockTokenFilter.ENGLISH_STOPSET);
         return new TokenStreamComponents(tokenizer, stream);
@@ -1973,7 +1973,7 @@ public class TestIndexWriter extends LuceneTestCase {
     final Automaton secondSet = BasicAutomata.makeString("foobar");
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer();
         TokenStream stream = new MockTokenFilter(tokenizer, MockTokenFilter.ENGLISH_STOPSET);
         stream = new MockTokenFilter(stream, new CharacterRunAutomaton(secondSet));

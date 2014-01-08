@@ -41,7 +41,7 @@ import org.junit.Ignore;
 public class TestBeiderMorseFilter extends BaseTokenStreamTestCase {
   private Analyzer analyzer = new Analyzer() {
     @Override
-    protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    protected TokenStreamComponents createComponents(String fieldName) {
       Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
       return new TokenStreamComponents(tokenizer, 
           new BeiderMorseFilter(tokenizer, new PhoneticEngine(NameType.GENERIC, RuleType.EXACT, true)));
@@ -71,7 +71,7 @@ public class TestBeiderMorseFilter extends BaseTokenStreamTestCase {
     }});
     Analyzer analyzer = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, 
             new BeiderMorseFilter(tokenizer, 
@@ -101,7 +101,7 @@ public class TestBeiderMorseFilter extends BaseTokenStreamTestCase {
   public void testEmptyTerm() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer, new BeiderMorseFilter(tokenizer, new PhoneticEngine(NameType.GENERIC, RuleType.EXACT, true)));
       }

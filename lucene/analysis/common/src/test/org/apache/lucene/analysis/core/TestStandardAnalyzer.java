@@ -250,7 +250,7 @@ public class TestStandardAnalyzer extends BaseTokenStreamTestCase {
     checkRandomData(random,
                     new Analyzer() {
                       @Override
-                      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+                      protected TokenStreamComponents createComponents(String fieldName) {
                         Tokenizer tokenizer = new StandardTokenizer(TEST_VERSION_CURRENT, reader);
                         TokenStream tokenStream = new MockGraphTokenFilter(random(), tokenizer);
                         return new TokenStreamComponents(tokenizer, tokenStream);

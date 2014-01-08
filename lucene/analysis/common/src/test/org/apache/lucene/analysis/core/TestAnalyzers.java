@@ -123,7 +123,7 @@ public class TestAnalyzers extends BaseTokenStreamTestCase {
   private static class LowerCaseWhitespaceAnalyzer extends Analyzer {
 
     @Override
-    public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    public TokenStreamComponents createComponents(String fieldName) {
       Tokenizer tokenizer = new WhitespaceTokenizer(TEST_VERSION_CURRENT);
       return new TokenStreamComponents(tokenizer, new LowerCaseFilter(TEST_VERSION_CURRENT, tokenizer));
     }

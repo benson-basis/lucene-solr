@@ -87,7 +87,7 @@ public final class MockAnalyzer extends Analyzer {
   }
 
   @Override
-  public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+  public TokenStreamComponents createComponents(String fieldName) {
     MockTokenizer tokenizer = new MockTokenizer(runAutomaton, lowerCase, maxTokenLength);
     tokenizer.setEnableChecks(enableChecks);
     MockTokenFilter filt = new MockTokenFilter(tokenizer, filter);

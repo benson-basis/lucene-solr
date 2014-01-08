@@ -315,7 +315,7 @@ public class CommonGramsFilterTest extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
 
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer t = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         CommonGramsFilter cgf = new CommonGramsFilter(TEST_VERSION_CURRENT, t, commonWords);
         return new TokenStreamComponents(t, cgf);
@@ -327,7 +327,7 @@ public class CommonGramsFilterTest extends BaseTokenStreamTestCase {
     Analyzer b = new Analyzer() {
 
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer t = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         CommonGramsFilter cgf = new CommonGramsFilter(TEST_VERSION_CURRENT, t, commonWords);
         return new TokenStreamComponents(t, new CommonGramsQueryFilter(cgf));

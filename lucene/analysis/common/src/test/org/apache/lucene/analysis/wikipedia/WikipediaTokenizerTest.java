@@ -179,7 +179,7 @@ public class WikipediaTokenizerTest extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
 
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new WikipediaTokenizer(reader);
         return new TokenStreamComponents(tokenizer, tokenizer);
       } 
@@ -193,7 +193,7 @@ public class WikipediaTokenizerTest extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
 
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new WikipediaTokenizer(reader);
         return new TokenStreamComponents(tokenizer, tokenizer);
       } 

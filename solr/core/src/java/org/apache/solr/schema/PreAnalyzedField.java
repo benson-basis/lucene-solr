@@ -86,7 +86,7 @@ public class PreAnalyzedField extends FieldType {
     return new SolrAnalyzer() {
       
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         return new TokenStreamComponents(new PreAnalyzedTokenizer(reader, parser));
       }
       

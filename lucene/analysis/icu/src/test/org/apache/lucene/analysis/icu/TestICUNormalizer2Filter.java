@@ -31,7 +31,7 @@ import com.ibm.icu.text.Normalizer2;
 public class TestICUNormalizer2Filter extends BaseTokenStreamTestCase {
   Analyzer a = new Analyzer() {
     @Override
-    public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    public TokenStreamComponents createComponents(String fieldName) {
       Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
       return new TokenStreamComponents(tokenizer, new ICUNormalizer2Filter(tokenizer));
     }
@@ -61,7 +61,7 @@ public class TestICUNormalizer2Filter extends BaseTokenStreamTestCase {
   public void testAlternate() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      public TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new ICUNormalizer2Filter(
             tokenizer,
@@ -82,7 +82,7 @@ public class TestICUNormalizer2Filter extends BaseTokenStreamTestCase {
   public void testEmptyTerm() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer, new ICUNormalizer2Filter(tokenizer));
       }

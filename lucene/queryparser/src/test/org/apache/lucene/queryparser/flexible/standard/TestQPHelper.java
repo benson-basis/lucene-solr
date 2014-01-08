@@ -147,7 +147,7 @@ public class TestQPHelper extends LuceneTestCase {
 
     /** Filters MockTokenizer with StopFilter. */
     @Override
-    public final TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    public final TokenStreamComponents createComponents(String fieldName) {
       Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
       return new TokenStreamComponents(tokenizer, new QPTestFilter(tokenizer));
     }
@@ -362,7 +362,7 @@ public class TestQPHelper extends LuceneTestCase {
 
   private class SimpleCJKAnalyzer extends Analyzer {
     @Override
-    public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    public TokenStreamComponents createComponents(String fieldName) {
       return new TokenStreamComponents(new SimpleCJKTokenizer());
     }
   }
@@ -1303,7 +1303,7 @@ public class TestQPHelper extends LuceneTestCase {
 
   private class CannedAnalyzer extends Analyzer {
     @Override
-    public TokenStreamComponents createComponents(String ignored, Reader alsoIgnored) {
+    public TokenStreamComponents createComponents(String ignored) {
       return new TokenStreamComponents(new CannedTokenizer());
     }
   }

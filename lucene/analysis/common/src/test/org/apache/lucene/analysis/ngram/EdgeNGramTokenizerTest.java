@@ -106,7 +106,7 @@ public class EdgeNGramTokenizerTest extends BaseTokenStreamTestCase {
       
       Analyzer a = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new EdgeNGramTokenizer(TEST_VERSION_CURRENT, min, max);
           return new TokenStreamComponents(tokenizer, tokenizer);
         }    

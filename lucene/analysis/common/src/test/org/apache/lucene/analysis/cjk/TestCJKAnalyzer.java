@@ -208,7 +208,7 @@ public class TestCJKAnalyzer extends BaseTokenStreamTestCase {
     final NormalizeCharMap norm = builder.build();
     Analyzer analyzer = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new StandardTokenizer(TEST_VERSION_CURRENT, reader);
         return new TokenStreamComponents(tokenizer, new CJKBigramFilter(tokenizer));
       }
@@ -252,7 +252,7 @@ public class TestCJKAnalyzer extends BaseTokenStreamTestCase {
     Analyzer analyzer = new Analyzer() {
 
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         TokenFilter filter = new FakeStandardTokenizer(tokenizer);
         filter = new StopFilter(TEST_VERSION_CURRENT, filter, CharArraySet.EMPTY_SET);
@@ -283,7 +283,7 @@ public class TestCJKAnalyzer extends BaseTokenStreamTestCase {
   public void testEmptyTerm() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer, new CJKBigramFilter(tokenizer));
       }

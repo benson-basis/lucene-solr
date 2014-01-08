@@ -57,7 +57,7 @@ public class TestNorwegianMinimalStemFilter extends BaseTokenStreamTestCase {
   public void testNynorskVocabulary() throws IOException {  
     Analyzer analyzer = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(source, new NorwegianMinimalStemFilter(source, NYNORSK));
       }
@@ -69,7 +69,7 @@ public class TestNorwegianMinimalStemFilter extends BaseTokenStreamTestCase {
     final CharArraySet exclusionSet = new CharArraySet(TEST_VERSION_CURRENT, asSet("sekretæren"), false);
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         TokenStream sink = new SetKeywordMarkerFilter(source, exclusionSet);
         return new TokenStreamComponents(source, new NorwegianMinimalStemFilter(sink));
@@ -87,7 +87,7 @@ public class TestNorwegianMinimalStemFilter extends BaseTokenStreamTestCase {
   public void testEmptyTerm() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer, new NorwegianMinimalStemFilter(tokenizer));
       }

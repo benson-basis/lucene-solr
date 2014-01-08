@@ -112,7 +112,7 @@ public class NGramTokenizerTest extends BaseTokenStreamTestCase {
       final int max = _TestUtil.nextInt(random(), min, 20);
       Analyzer a = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new NGramTokenizer(TEST_VERSION_CURRENT, reader, min, max);
           return new TokenStreamComponents(tokenizer, tokenizer);
         }    

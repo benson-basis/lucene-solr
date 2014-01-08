@@ -34,7 +34,7 @@ import java.util.Random;
 public class TestJapaneseReadingFormFilter extends BaseTokenStreamTestCase {
   private Analyzer katakanaAnalyzer = new Analyzer() {
     @Override
-    protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    protected TokenStreamComponents createComponents(String fieldName) {
       Tokenizer tokenizer = new JapaneseTokenizer(reader, null, true, JapaneseTokenizer.Mode.SEARCH);
       return new TokenStreamComponents(tokenizer, new JapaneseReadingFormFilter(tokenizer, false));
     }
@@ -42,7 +42,7 @@ public class TestJapaneseReadingFormFilter extends BaseTokenStreamTestCase {
 
   private Analyzer romajiAnalyzer = new Analyzer() {
     @Override
-    protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    protected TokenStreamComponents createComponents(String fieldName) {
       Tokenizer tokenizer = new JapaneseTokenizer(reader, null, true, JapaneseTokenizer.Mode.SEARCH);
       return new TokenStreamComponents(tokenizer, new JapaneseReadingFormFilter(tokenizer, true));
     }
@@ -58,7 +58,7 @@ public class TestJapaneseReadingFormFilter extends BaseTokenStreamTestCase {
   public void testKatakanaReadingsHalfWidth() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new JapaneseTokenizer(reader, null, true, JapaneseTokenizer.Mode.SEARCH);
         TokenStream stream = new CJKWidthFilter(tokenizer);
         return new TokenStreamComponents(tokenizer, new JapaneseReadingFormFilter(stream, false));
@@ -78,7 +78,7 @@ public class TestJapaneseReadingFormFilter extends BaseTokenStreamTestCase {
   public void testRomajiReadingsHalfWidth() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new JapaneseTokenizer(reader, null, true, JapaneseTokenizer.Mode.SEARCH);
         TokenStream stream = new CJKWidthFilter(tokenizer);
         return new TokenStreamComponents(tokenizer, new JapaneseReadingFormFilter(stream, true));
@@ -98,7 +98,7 @@ public class TestJapaneseReadingFormFilter extends BaseTokenStreamTestCase {
   public void testEmptyTerm() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer, new JapaneseReadingFormFilter(tokenizer));
       }

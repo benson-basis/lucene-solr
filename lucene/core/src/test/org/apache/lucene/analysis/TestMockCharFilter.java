@@ -26,7 +26,7 @@ public class TestMockCharFilter extends BaseTokenStreamTestCase {
     Analyzer analyzer = new Analyzer() {
 
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, tokenizer);
       }

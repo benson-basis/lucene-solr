@@ -390,7 +390,7 @@ public class TestIndexWriterExceptions extends LuceneTestCase {
 
     Analyzer analyzer = new Analyzer(Analyzer.PER_FIELD_REUSE_STRATEGY) {
       @Override
-      public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      public TokenStreamComponents createComponents(String fieldName) {
         MockTokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         tokenizer.setEnableChecks(false); // disable workflow checking as we forcefully close() in exceptional cases.
         return new TokenStreamComponents(tokenizer, new CrashingFilter(fieldName, tokenizer));
@@ -456,7 +456,7 @@ public class TestIndexWriterExceptions extends LuceneTestCase {
     IndexWriterConfig conf = newIndexWriterConfig( TEST_VERSION_CURRENT, new Analyzer() {
 
       @Override
-      public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      public TokenStreamComponents createComponents(String fieldName) {
         MockTokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
         tokenizer.setEnableChecks(false); // disable workflow checking as we forcefully close() in exceptional cases.
         return new TokenStreamComponents(tokenizer, new TokenFilter(tokenizer) {
@@ -593,7 +593,7 @@ public class TestIndexWriterExceptions extends LuceneTestCase {
   public void testDocumentsWriterExceptions() throws IOException {
     Analyzer analyzer = new Analyzer(Analyzer.PER_FIELD_REUSE_STRATEGY) {
       @Override
-      public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      public TokenStreamComponents createComponents(String fieldName) {
         MockTokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         tokenizer.setEnableChecks(false); // disable workflow checking as we forcefully close() in exceptional cases.
         return new TokenStreamComponents(tokenizer, new CrashingFilter(fieldName, tokenizer));
@@ -688,7 +688,7 @@ public class TestIndexWriterExceptions extends LuceneTestCase {
   public void testDocumentsWriterExceptionThreads() throws Exception {
     Analyzer analyzer = new Analyzer(Analyzer.PER_FIELD_REUSE_STRATEGY) {
       @Override
-      public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      public TokenStreamComponents createComponents(String fieldName) {
         MockTokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         tokenizer.setEnableChecks(false); // disable workflow checking as we forcefully close() in exceptional cases.
         return new TokenStreamComponents(tokenizer, new CrashingFilter(fieldName, tokenizer));

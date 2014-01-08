@@ -73,7 +73,7 @@ public class HunspellStemFilterTest  extends BaseTokenStreamTestCase {
     Analyzer analyzer = new Analyzer() {
 
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new HunspellStemFilter(tokenizer, DICTIONARY, _TestUtil.nextInt(random(), 1, 3)));
       }  
@@ -84,7 +84,7 @@ public class HunspellStemFilterTest  extends BaseTokenStreamTestCase {
   public void testEmptyTerm() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer, new HunspellStemFilter(tokenizer, DICTIONARY, _TestUtil.nextInt(random(), 1, 3)));
       }

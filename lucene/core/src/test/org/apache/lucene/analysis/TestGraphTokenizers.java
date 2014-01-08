@@ -174,7 +174,7 @@ public class TestGraphTokenizers extends BaseTokenStreamTestCase {
       // seed:
       final Analyzer a = new Analyzer() {
           @Override
-          protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+          protected TokenStreamComponents createComponents(String fieldName) {
             final Tokenizer t = new MockTokenizer(MockTokenizer.WHITESPACE, false);
             final TokenStream t2 = new MockGraphTokenFilter(random(), t);
             return new TokenStreamComponents(t, t2);
@@ -196,7 +196,7 @@ public class TestGraphTokenizers extends BaseTokenStreamTestCase {
       // seed:
       final Analyzer a = new Analyzer() {
           @Override
-          protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+          protected TokenStreamComponents createComponents(String fieldName) {
             final Tokenizer t = new GraphTokenizer();
             final TokenStream t2 = new MockGraphTokenFilter(random(), t);
             return new TokenStreamComponents(t, t2);
@@ -258,7 +258,7 @@ public class TestGraphTokenizers extends BaseTokenStreamTestCase {
       // seed:
       final Analyzer a = new Analyzer() {
           @Override
-          protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+          protected TokenStreamComponents createComponents(String fieldName) {
             final Tokenizer t = new MockTokenizer(MockTokenizer.WHITESPACE, false);
             final TokenStream t2 = new MockGraphTokenFilter(random(), t);
             final TokenStream t3 = new RemoveATokens(t2);
@@ -285,7 +285,7 @@ public class TestGraphTokenizers extends BaseTokenStreamTestCase {
       // seed:
       final Analyzer a = new Analyzer() {
           @Override
-          protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+          protected TokenStreamComponents createComponents(String fieldName) {
             final Tokenizer t = new MockTokenizer(MockTokenizer.WHITESPACE, false);
             final TokenStream t2 = new RemoveATokens(t);
             final TokenStream t3 = new MockGraphTokenFilter(random(), t2);
@@ -312,7 +312,7 @@ public class TestGraphTokenizers extends BaseTokenStreamTestCase {
       // seed:
       final Analyzer a = new Analyzer() {
           @Override
-          protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+          protected TokenStreamComponents createComponents(String fieldName) {
             final Tokenizer t = new MockTokenizer(MockTokenizer.WHITESPACE, false);
             final TokenStream t2 = new MockGraphTokenFilter(random(), t);
             return new TokenStreamComponents(t, t2);
@@ -336,7 +336,7 @@ public class TestGraphTokenizers extends BaseTokenStreamTestCase {
       // seed:
       final Analyzer a = new Analyzer() {
           @Override
-          protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+          protected TokenStreamComponents createComponents(String fieldName) {
             final Tokenizer t = new MockTokenizer(MockTokenizer.WHITESPACE, false);
             final TokenStream t1 = new MockGraphTokenFilter(random(), t);
             final TokenStream t2 = new MockGraphTokenFilter(random(), t1);
@@ -360,7 +360,7 @@ public class TestGraphTokenizers extends BaseTokenStreamTestCase {
       // seed:
       final Analyzer a = new Analyzer() {
           @Override
-          protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+          protected TokenStreamComponents createComponents(String fieldName) {
             final Tokenizer t = new MockTokenizer(MockTokenizer.WHITESPACE, false);
             final TokenStream t1 = new MockGraphTokenFilter(random(), t);
             final TokenStream t2 = new MockHoleInjectingTokenFilter(random(), t1);
@@ -384,7 +384,7 @@ public class TestGraphTokenizers extends BaseTokenStreamTestCase {
       // seed:
       final Analyzer a = new Analyzer() {
           @Override
-          protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+          protected TokenStreamComponents createComponents(String fieldName) {
             final Tokenizer t = new MockTokenizer(MockTokenizer.WHITESPACE, false);
             final TokenStream t1 = new MockHoleInjectingTokenFilter(random(), t);
             final TokenStream t2 = new MockGraphTokenFilter(random(), t1);

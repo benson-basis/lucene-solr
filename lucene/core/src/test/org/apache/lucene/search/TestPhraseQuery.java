@@ -53,7 +53,7 @@ public class TestPhraseQuery extends LuceneTestCase {
     directory = newDirectory();
     Analyzer analyzer = new Analyzer() {
       @Override
-      public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      public TokenStreamComponents createComponents(String fieldName) {
         return new TokenStreamComponents(new MockTokenizer(MockTokenizer.WHITESPACE, false));
       }
 

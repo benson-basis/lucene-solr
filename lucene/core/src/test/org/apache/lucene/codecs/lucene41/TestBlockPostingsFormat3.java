@@ -69,7 +69,7 @@ public class TestBlockPostingsFormat3 extends LuceneTestCase {
     Directory dir = newDirectory();
     Analyzer analyzer = new Analyzer(Analyzer.PER_FIELD_REUSE_STRATEGY) {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer();
         if (fieldName.contains("payloadsFixed")) {
           TokenFilter filter = new MockFixedLengthPayloadFilter(new Random(0), tokenizer, 1);

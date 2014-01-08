@@ -118,8 +118,7 @@ public class TestStandardQP extends QueryParserTestBase {
     // TODO implement LUCENE-2566 and remove this (override)method
     Analyzer a = new Analyzer() {
       @Override
-      public TokenStreamComponents createComponents(String fieldName,
-          Reader reader) {
+      public TokenStreamComponents createComponents(String fieldName) {
         return new TokenStreamComponents(new MockTokenizer(MockTokenizer.WHITESPACE, false));
       }
     };

@@ -75,7 +75,7 @@ public class TestPortugueseMinimalStemFilter extends BaseTokenStreamTestCase {
     final CharArraySet exclusionSet = new CharArraySet(TEST_VERSION_CURRENT, asSet("quilométricas"), false);
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer source = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         TokenStream sink = new SetKeywordMarkerFilter(source, exclusionSet);
         return new TokenStreamComponents(source, new PortugueseMinimalStemFilter(sink));
@@ -92,7 +92,7 @@ public class TestPortugueseMinimalStemFilter extends BaseTokenStreamTestCase {
   public void testEmptyTerm() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new PortugueseMinimalStemFilter(tokenizer));
       }

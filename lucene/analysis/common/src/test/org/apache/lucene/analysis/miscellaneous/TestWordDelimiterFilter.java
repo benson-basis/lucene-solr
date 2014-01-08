@@ -345,7 +345,7 @@ public class TestWordDelimiterFilter extends BaseTokenStreamTestCase {
       Analyzer a = new Analyzer() {
         
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
           return new TokenStreamComponents(tokenizer, new WordDelimiterFilter(tokenizer, flags, protectedWords));
         }
@@ -367,7 +367,7 @@ public class TestWordDelimiterFilter extends BaseTokenStreamTestCase {
     
       Analyzer a = new Analyzer() { 
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new KeywordTokenizer(reader);
           return new TokenStreamComponents(tokenizer, new WordDelimiterFilter(tokenizer, flags, protectedWords));
         }

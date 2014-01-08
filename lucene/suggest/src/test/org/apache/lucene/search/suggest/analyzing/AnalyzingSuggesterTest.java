@@ -273,7 +273,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
 
     final Analyzer analyzer = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
         
         return new TokenStreamComponents(tokenizer) {
@@ -346,7 +346,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
 
     final Analyzer analyzer = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
         
         return new TokenStreamComponents(tokenizer) {
@@ -424,7 +424,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
   private final Analyzer getUnusualAnalyzer() {
     return new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
         
         return new TokenStreamComponents(tokenizer) {
@@ -631,7 +631,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
     }
 
     @Override
-    public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    public TokenStreamComponents createComponents(String fieldName) {
       MockTokenizer tokenizer = new MockTokenizer(factory, reader, MockTokenizer.WHITESPACE, false, MockTokenizer.DEFAULT_MAX_TOKEN_LENGTH);
       tokenizer.setEnableChecks(true);
       TokenStream next;
@@ -948,7 +948,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
   public void testDupSurfaceFormsMissingResults() throws Exception {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
         
         return new TokenStreamComponents(tokenizer) {
@@ -1007,7 +1007,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
   public void testDupSurfaceFormsMissingResults2() throws Exception {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
         
         return new TokenStreamComponents(tokenizer) {
@@ -1077,7 +1077,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
   public void test0ByteKeys() throws Exception {
     final Analyzer a = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
         
           return new TokenStreamComponents(tokenizer) {
@@ -1147,7 +1147,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
 
     final Analyzer a = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
         
           return new TokenStreamComponents(tokenizer) {

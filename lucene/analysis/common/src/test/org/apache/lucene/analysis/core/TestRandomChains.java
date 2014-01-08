@@ -643,7 +643,7 @@ public class TestRandomChains extends BaseTokenStreamTestCase {
     }
     
     @Override
-    protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    protected TokenStreamComponents createComponents(String fieldName) {
       Random random = new Random(seed);
       TokenizerSpec tokenizerSpec = newTokenizer(random, reader);
       //System.out.println("seed=" + seed + ",create tokenizer=" + tokenizerSpec.toString);

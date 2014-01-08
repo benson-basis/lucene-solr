@@ -128,7 +128,7 @@ public class NGramTokenFilterTest extends BaseTokenStreamTestCase {
   public void testInvalidOffsets() throws Exception {
     Analyzer analyzer = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         TokenFilter filters = new ASCIIFoldingFilter(tokenizer);
         filters = new NGramTokenFilter(TEST_VERSION_CURRENT, filters, 2, 2);
@@ -149,7 +149,7 @@ public class NGramTokenFilterTest extends BaseTokenStreamTestCase {
       final int max = _TestUtil.nextInt(random(), min, 20);
       Analyzer a = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
           return new TokenStreamComponents(tokenizer, 
               new NGramTokenFilter(TEST_VERSION_CURRENT, tokenizer, min, max));
@@ -163,7 +163,7 @@ public class NGramTokenFilterTest extends BaseTokenStreamTestCase {
     Random random = random();
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer, 
             new NGramTokenFilter(TEST_VERSION_CURRENT, tokenizer, 2, 15));

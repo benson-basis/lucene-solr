@@ -34,7 +34,7 @@ public class TestSearchMode extends BaseTokenStreamTestCase {
   private final static String SEGMENTATION_FILENAME = "search-segmentation-tests.txt";
   private final Analyzer analyzer = new Analyzer() {
     @Override
-    protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    protected TokenStreamComponents createComponents(String fieldName) {
       Tokenizer tokenizer = new JapaneseTokenizer(reader, null, true, Mode.SEARCH);
       return new TokenStreamComponents(tokenizer, tokenizer);
     }

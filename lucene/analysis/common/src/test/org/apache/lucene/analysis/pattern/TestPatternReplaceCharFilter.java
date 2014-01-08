@@ -307,7 +307,7 @@ public class TestPatternReplaceCharFilter extends BaseTokenStreamTestCase {
       final String replacement = _TestUtil.randomSimpleString(random);
       Analyzer a = new Analyzer() {
         @Override
-        protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+        protected TokenStreamComponents createComponents(String fieldName) {
           Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
           return new TokenStreamComponents(tokenizer, tokenizer);
         }

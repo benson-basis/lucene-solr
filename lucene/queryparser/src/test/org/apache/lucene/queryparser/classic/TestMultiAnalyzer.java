@@ -125,7 +125,7 @@ public class TestMultiAnalyzer extends BaseTokenStreamTestCase {
   private class MultiAnalyzer extends Analyzer {
 
     @Override
-    public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    public TokenStreamComponents createComponents(String fieldName) {
       Tokenizer result = new MockTokenizer(MockTokenizer.WHITESPACE, true);
       return new TokenStreamComponents(result, new TestFilter(result));
     }
@@ -196,7 +196,7 @@ public class TestMultiAnalyzer extends BaseTokenStreamTestCase {
   private class PosIncrementAnalyzer extends Analyzer {
 
     @Override
-    public TokenStreamComponents createComponents(String fieldName, Reader reader) {
+    public TokenStreamComponents createComponents(String fieldName) {
       Tokenizer result = new MockTokenizer(MockTokenizer.WHITESPACE, true);
       return new TokenStreamComponents(result, new TestPosIncrementFilter(result));
     }

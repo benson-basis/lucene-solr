@@ -38,7 +38,7 @@ import java.util.Map;
  * <pre class="prettyprint">
  * Analyzer analyzer = new Analyzer() {
  *  {@literal @Override}
- *   protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+ *   protected TokenStreamComponents createComponents(String fieldName) {
  *     Tokenizer source = new FooTokenizer(reader);
  *     TokenStream filter = new FooFilter(source);
  *     filter = new BarFilter(filter);

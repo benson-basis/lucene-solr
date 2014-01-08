@@ -87,7 +87,7 @@ public class TestPatternReplaceFilter extends BaseTokenStreamTestCase {
   public void testRandomStrings() throws Exception {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         TokenStream filter = new PatternReplaceFilter(tokenizer, Pattern.compile("a"), "b", false);
         return new TokenStreamComponents(tokenizer, filter);
@@ -97,7 +97,7 @@ public class TestPatternReplaceFilter extends BaseTokenStreamTestCase {
     
     Analyzer b = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
         TokenStream filter = new PatternReplaceFilter(tokenizer, Pattern.compile("a"), "b", true);
         return new TokenStreamComponents(tokenizer, filter);
@@ -109,7 +109,7 @@ public class TestPatternReplaceFilter extends BaseTokenStreamTestCase {
   public void testEmptyTerm() throws IOException {
     Analyzer a = new Analyzer() {
       @Override
-      protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
+      protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new KeywordTokenizer(reader);
         return new TokenStreamComponents(tokenizer,  new PatternReplaceFilter(tokenizer, Pattern.compile("a"), "b", true));
       }
