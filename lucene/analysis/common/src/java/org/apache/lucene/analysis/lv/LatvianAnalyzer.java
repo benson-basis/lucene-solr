@@ -117,7 +117,7 @@ public final class LatvianAnalyzer extends StopwordAnalyzerBase {
   @Override
   protected TokenStreamComponents createComponents(String fieldName,
       Reader reader) {
-    final Tokenizer source = new StandardTokenizer(matchVersion, reader);
+    final Tokenizer source = new StandardTokenizer(matchVersion);
     TokenStream result = new StandardFilter(matchVersion, source);
     result = new LowerCaseFilter(matchVersion, result);
     result = new StopFilter(matchVersion, result, stopwords);

@@ -133,7 +133,7 @@ public class SynonymFilterFactory extends TokenFilterFactory implements Resource
       analyzer = new Analyzer() {
         @Override
         protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-          Tokenizer tokenizer = factory == null ? new WhitespaceTokenizer(Version.LUCENE_CURRENT, reader) : factory.create(reader);
+          Tokenizer tokenizer = factory == null ? new WhitespaceTokenizer(Version.LUCENE_CURRENT) : factory.create();
           TokenStream stream = ignoreCase ? new LowerCaseFilter(Version.LUCENE_CURRENT, tokenizer) : tokenizer;
           return new TokenStreamComponents(tokenizer, stream);
         }

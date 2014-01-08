@@ -157,7 +157,7 @@ public final class DutchAnalyzer extends Analyzer {
   @Override
   protected TokenStreamComponents createComponents(String fieldName,
       Reader aReader) {
-    final Tokenizer source = new StandardTokenizer(matchVersion, aReader);
+    final Tokenizer source = new StandardTokenizer(matchVersion);
     TokenStream result = new StandardFilter(matchVersion, source);
     result = new LowerCaseFilter(matchVersion, result);
     result = new StopFilter(matchVersion, result, stoptable);

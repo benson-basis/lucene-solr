@@ -146,9 +146,10 @@ public class TestBrazilianStemmer extends BaseTokenStreamTestCase {
   public void testWithKeywordAttribute() throws IOException {
     CharArraySet set = new CharArraySet(TEST_VERSION_CURRENT, 1, true);
     set.add("Brasília");
-    BrazilianStemFilter filter = new BrazilianStemFilter(
-        new SetKeywordMarkerFilter(new LowerCaseTokenizer(TEST_VERSION_CURRENT, new StringReader(
-            "Brasília Brasilia")), set));
+    Tokenizer tokenizer = new LowerCaseTokenizer(TEST_VERSION_CURRENT);
+    tokenizer.setReader(new StringReader("Brasília Brasilia"));
+    BrazilianStemFilter filter = new BrazilianStemFilter(new SetKeywordMarkerFilter(tokenizer, set));
+
     assertTokenStreamContents(filter, new String[] { "brasília", "brasil" });
   }
 
@@ -169,7 +170,7 @@ public class TestBrazilianStemmer extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new BrazilianStemFilter(tokenizer));
       }
     };

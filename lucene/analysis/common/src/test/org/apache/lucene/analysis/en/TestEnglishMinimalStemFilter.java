@@ -34,7 +34,7 @@ public class TestEnglishMinimalStemFilter extends BaseTokenStreamTestCase {
     @Override
     protected TokenStreamComponents createComponents(String fieldName,
         Reader reader) {
-      Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+      Tokenizer source = new MockTokenizer(MockTokenizer.WHITESPACE, false);
       return new TokenStreamComponents(source, new EnglishMinimalStemFilter(source));
     }
   };
@@ -61,7 +61,7 @@ public class TestEnglishMinimalStemFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new EnglishMinimalStemFilter(tokenizer));
       }
     };

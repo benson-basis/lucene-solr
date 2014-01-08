@@ -31,7 +31,7 @@ public class TestSoraniStemFilterFactory extends BaseTokenStreamFactoryTestCase 
   
   public void testStemming() throws Exception {
     Reader reader = new StringReader("پیاوەکان");
-    TokenStream stream = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+    TokenStream stream = new MockTokenizer(MockTokenizer.WHITESPACE, false);
     stream = tokenFilterFactory("SoraniStem").create(stream);
     assertTokenStreamContents(stream, new String[] { "پیاو" });
   }

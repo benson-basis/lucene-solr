@@ -66,7 +66,7 @@ public class TestPerFieldAnalyzerWrapper extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        return new TokenStreamComponents(new MockTokenizer(reader));
+        return new TokenStreamComponents(new MockTokenizer());
       }
 
       @Override

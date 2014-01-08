@@ -42,7 +42,7 @@ public class TestPortugueseMinimalStemFilter extends BaseTokenStreamTestCase {
     @Override
     protected TokenStreamComponents createComponents(String fieldName,
         Reader reader) {
-      Tokenizer source = new StandardTokenizer(TEST_VERSION_CURRENT, reader);
+      Tokenizer source = new StandardTokenizer(TEST_VERSION_CURRENT);
       TokenStream result = new LowerCaseFilter(TEST_VERSION_CURRENT, source);
       return new TokenStreamComponents(source, new PortugueseMinimalStemFilter(result));
     }
@@ -76,7 +76,7 @@ public class TestPortugueseMinimalStemFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer source = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         TokenStream sink = new SetKeywordMarkerFilter(source, exclusionSet);
         return new TokenStreamComponents(source, new PortugueseMinimalStemFilter(sink));
       }
@@ -93,7 +93,7 @@ public class TestPortugueseMinimalStemFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new PortugueseMinimalStemFilter(tokenizer));
       }
     };

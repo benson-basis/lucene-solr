@@ -128,7 +128,7 @@ public final class ItalianAnalyzer extends StopwordAnalyzerBase {
   @Override
   protected TokenStreamComponents createComponents(String fieldName,
       Reader reader) {
-    final Tokenizer source = new StandardTokenizer(matchVersion, reader);
+    final Tokenizer source = new StandardTokenizer(matchVersion);
     TokenStream result = new StandardFilter(matchVersion, source);
     result = new ElisionFilter(result, DEFAULT_ARTICLES);
     result = new LowerCaseFilter(matchVersion, result);

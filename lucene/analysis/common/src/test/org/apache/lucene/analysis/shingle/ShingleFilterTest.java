@@ -981,7 +981,8 @@ public class ShingleFilterTest extends BaseTokenStreamTestCase {
   }
   
   public void testReset() throws Exception {
-    Tokenizer wsTokenizer = new WhitespaceTokenizer(TEST_VERSION_CURRENT, new StringReader("please divide this sentence"));
+    Tokenizer wsTokenizer = new WhitespaceTokenizer(TEST_VERSION_CURRENT);
+    wsTokenizer.setReader(new StringReader("please divide this sentence"));
     TokenStream filter = new ShingleFilter(wsTokenizer, 2);
     assertTokenStreamContents(filter,
       new String[]{"please","please divide","divide","divide this","this","this sentence","sentence"},
@@ -1106,7 +1107,7 @@ public class ShingleFilterTest extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new ShingleFilter(tokenizer));
       }
     };
@@ -1119,7 +1120,7 @@ public class ShingleFilterTest extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new ShingleFilter(tokenizer));
       }
     };
@@ -1130,7 +1131,7 @@ public class ShingleFilterTest extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new ShingleFilter(tokenizer));
       }
     };

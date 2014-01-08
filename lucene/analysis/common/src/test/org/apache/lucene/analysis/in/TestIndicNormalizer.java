@@ -47,7 +47,8 @@ public class TestIndicNormalizer extends BaseTokenStreamTestCase {
   }
   
   private void check(String input, String output) throws IOException {
-    Tokenizer tokenizer = new MockTokenizer(new StringReader(input), MockTokenizer.WHITESPACE, false);;
+    Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);;
+    tokenizer.setReader(new StringReader(input));
     TokenFilter tf = new IndicNormalizationFilter(tokenizer);
     assertTokenStreamContents(tf, new String[] { output });
   }
@@ -56,7 +57,7 @@ public class TestIndicNormalizer extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new IndicNormalizationFilter(tokenizer));
       }
     };

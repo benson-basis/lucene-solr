@@ -121,7 +121,7 @@ public final class TurkishAnalyzer extends StopwordAnalyzerBase {
   @Override
   protected TokenStreamComponents createComponents(String fieldName,
       Reader reader) {
-    final Tokenizer source = new StandardTokenizer(matchVersion, reader);
+    final Tokenizer source = new StandardTokenizer(matchVersion);
     TokenStream result = new StandardFilter(matchVersion, source);
     result = new TurkishLowerCaseFilter(result);
     result = new StopFilter(matchVersion, result, stopwords);

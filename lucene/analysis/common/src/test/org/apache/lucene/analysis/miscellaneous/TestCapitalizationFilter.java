@@ -107,8 +107,10 @@ public class TestCapitalizationFilter extends BaseTokenStreamTestCase {
       boolean onlyFirstWord, CharArraySet keep, boolean forceFirstLetter,
       Collection<char[]> okPrefix, int minWordLength, int maxWordCount,
       int maxTokenLength) throws IOException {
-    assertCapitalizesTo(new MockTokenizer(new StringReader(input), MockTokenizer.WHITESPACE, false),
-        expected, onlyFirstWord, keep, forceFirstLetter, okPrefix, minWordLength, 
+    final MockTokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
+    tokenizer.setReader(new StringReader(input));
+    assertCapitalizesTo(tokenizer,
+        expected, onlyFirstWord, keep, forceFirstLetter, okPrefix, minWordLength,
         maxWordCount, maxTokenLength);
   }
   
@@ -116,7 +118,9 @@ public class TestCapitalizationFilter extends BaseTokenStreamTestCase {
       boolean onlyFirstWord, CharArraySet keep, boolean forceFirstLetter,
       Collection<char[]> okPrefix, int minWordLength, int maxWordCount,
       int maxTokenLength) throws IOException {
-    assertCapitalizesTo(new MockTokenizer(new StringReader(input), MockTokenizer.KEYWORD, false),
+    final MockTokenizer tokenizer = new MockTokenizer(MockTokenizer.KEYWORD, false);
+    tokenizer.setReader(new StringReader(input));
+    assertCapitalizesTo(tokenizer,
         new String[] { expected }, onlyFirstWord, keep, forceFirstLetter, okPrefix,
         minWordLength, maxWordCount, maxTokenLength);    
   }
@@ -127,7 +131,7 @@ public class TestCapitalizationFilter extends BaseTokenStreamTestCase {
 
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new CapitalizationFilter(tokenizer));
       }
     };
@@ -139,7 +143,7 @@ public class TestCapitalizationFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new CapitalizationFilter(tokenizer));
       }
     };

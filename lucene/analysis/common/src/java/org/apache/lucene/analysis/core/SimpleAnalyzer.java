@@ -50,6 +50,6 @@ public final class SimpleAnalyzer extends Analyzer {
   @Override
   protected TokenStreamComponents createComponents(final String fieldName,
       final Reader reader) {
-    return new TokenStreamComponents(new LowerCaseTokenizer(matchVersion, reader));
+    return new TokenStreamComponents(new LowerCaseTokenizer(matchVersion));
   }
 }

@@ -157,7 +157,7 @@ public class TestRemoveDuplicatesTokenFilter extends BaseTokenStreamTestCase {
       final Analyzer analyzer = new Analyzer() {
         @Override
         protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-          Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
+          Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
           TokenStream stream = new SynonymFilter(tokenizer, map, ignoreCase);
           return new TokenStreamComponents(tokenizer, new RemoveDuplicatesTokenFilter(stream));
         }
@@ -171,7 +171,7 @@ public class TestRemoveDuplicatesTokenFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new RemoveDuplicatesTokenFilter(tokenizer));
       }
     };

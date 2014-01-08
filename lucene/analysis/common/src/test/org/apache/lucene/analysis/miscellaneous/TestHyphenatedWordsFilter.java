@@ -35,7 +35,8 @@ public class TestHyphenatedWordsFilter extends BaseTokenStreamTestCase {
   public void testHyphenatedWords() throws Exception {
     String input = "ecologi-\r\ncal devel-\r\n\r\nop compre-\u0009hensive-hands-on and ecologi-\ncal";
     // first test
-    TokenStream ts = new MockTokenizer(new StringReader(input), MockTokenizer.WHITESPACE, false);
+    TokenStream ts = new MockTokenizer(MockTokenizer.WHITESPACE, false);
+    ((Tokenizer)ts).setReader(new StringReader(input));
     ts = new HyphenatedWordsFilter(ts);
     assertTokenStreamContents(ts,
         new String[] { "ecological", "develop", "comprehensive-hands-on", "and", "ecological" });
@@ -45,17 +46,19 @@ public class TestHyphenatedWordsFilter extends BaseTokenStreamTestCase {
    * Test that HyphenatedWordsFilter behaves correctly with a final hyphen
    */
   public void testHyphenAtEnd() throws Exception {
-      String input = "ecologi-\r\ncal devel-\r\n\r\nop compre-\u0009hensive-hands-on and ecology-";
+    String input = "ecologi-\r\ncal devel-\r\n\r\nop compre-\u0009hensive-hands-on and ecology-";
       // first test
-      TokenStream ts = new MockTokenizer(new StringReader(input), MockTokenizer.WHITESPACE, false);
-      ts = new HyphenatedWordsFilter(ts);
-      assertTokenStreamContents(ts,
-          new String[] { "ecological", "develop", "comprehensive-hands-on", "and", "ecology-" });
+    TokenStream ts = new MockTokenizer(MockTokenizer.WHITESPACE, false);
+    ((Tokenizer)ts).setReader(new StringReader(input));
+    ts = new HyphenatedWordsFilter(ts);
+    assertTokenStreamContents(ts,
+        new String[] { "ecological", "develop", "comprehensive-hands-on", "and", "ecology-" });
   }
 
   public void testOffsets() throws Exception {
     String input = "abc- def geh 1234- 5678-";
-    TokenStream ts = new MockTokenizer(new StringReader(input), MockTokenizer.WHITESPACE, false);
+    TokenStream ts = new MockTokenizer(MockTokenizer.WHITESPACE, false);
+    ((Tokenizer)ts).setReader(new StringReader(input));
     ts = new HyphenatedWordsFilter(ts);
     assertTokenStreamContents(ts, 
         new String[] { "abcdef", "geh", "12345678-" },
@@ -69,7 +72,7 @@ public class TestHyphenatedWordsFilter extends BaseTokenStreamTestCase {
 
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new HyphenatedWordsFilter(tokenizer));
       }
     };
@@ -81,7 +84,7 @@ public class TestHyphenatedWordsFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new HyphenatedWordsFilter(tokenizer));
       }
     };

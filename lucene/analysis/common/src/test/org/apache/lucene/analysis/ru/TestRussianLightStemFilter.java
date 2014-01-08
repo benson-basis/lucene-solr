@@ -39,7 +39,7 @@ public class TestRussianLightStemFilter extends BaseTokenStreamTestCase {
     @Override
     protected TokenStreamComponents createComponents(String fieldName,
         Reader reader) {
-      Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+      Tokenizer source = new MockTokenizer(MockTokenizer.WHITESPACE, false);
       return new TokenStreamComponents(source, new RussianLightStemFilter(source));
     }
   };
@@ -54,7 +54,7 @@ public class TestRussianLightStemFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer source = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer source = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         TokenStream sink = new SetKeywordMarkerFilter(source, exclusionSet);
         return new TokenStreamComponents(source, new RussianLightStemFilter(sink));
       }
@@ -71,7 +71,7 @@ public class TestRussianLightStemFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new RussianLightStemFilter(tokenizer));
       }
     };

@@ -50,6 +50,6 @@ public final class WhitespaceAnalyzer extends Analyzer {
   @Override
   protected TokenStreamComponents createComponents(final String fieldName,
       final Reader reader) {
-    return new TokenStreamComponents(new WhitespaceTokenizer(matchVersion, reader));
+    return new TokenStreamComponents(new WhitespaceTokenizer(matchVersion));
   }
 }

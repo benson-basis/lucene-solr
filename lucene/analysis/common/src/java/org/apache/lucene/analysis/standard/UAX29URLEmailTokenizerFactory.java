@@ -46,7 +46,7 @@ public class UAX29URLEmailTokenizerFactory extends TokenizerFactory {
   }
 
   @Override
-  public UAX29URLEmailTokenizer create(AttributeFactory factory, Reader input) {
+  public UAX29URLEmailTokenizer create(AttributeFactory factory) {
     UAX29URLEmailTokenizer tokenizer = new UAX29URLEmailTokenizer(luceneMatchVersion, factory);
     tokenizer.setMaxTokenLength(maxTokenLength);
     return tokenizer;

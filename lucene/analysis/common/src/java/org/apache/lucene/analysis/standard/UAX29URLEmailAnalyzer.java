@@ -97,7 +97,7 @@ public final class UAX29URLEmailAnalyzer extends StopwordAnalyzerBase {
 
   @Override
   protected TokenStreamComponents createComponents(final String fieldName, final Reader reader) {
-    final UAX29URLEmailTokenizer src = new UAX29URLEmailTokenizer(matchVersion, reader);
+    final UAX29URLEmailTokenizer src = new UAX29URLEmailTokenizer(matchVersion);
     src.setMaxTokenLength(maxTokenLength);
     TokenStream tok = new StandardFilter(matchVersion, src);
     tok = new LowerCaseFilter(matchVersion, tok);
