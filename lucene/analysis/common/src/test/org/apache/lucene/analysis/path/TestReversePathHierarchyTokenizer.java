@@ -103,6 +103,7 @@ public class TestReversePathHierarchyTokenizer extends BaseTokenStreamTestCase {
   public void testEndOfDelimiterReverseSkip() throws Exception {
     String path = "/a/b/c/";
     ReversePathHierarchyTokenizer t = new ReversePathHierarchyTokenizer( 1 );
+    t.setReader(new StringReader(path));
     new StringReader(path);
     assertTokenStreamContents(t,
         new String[]{"/a/b/", "a/b/", "b/"},
