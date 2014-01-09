@@ -30,7 +30,7 @@ public class TestICUFoldingFilter extends BaseTokenStreamTestCase {
   Analyzer a = new Analyzer() {
     @Override
     public TokenStreamComponents createComponents(String fieldName) {
-      Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+      Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
       return new TokenStreamComponents(tokenizer, new ICUFoldingFilter(tokenizer));
     }
   };
@@ -83,7 +83,7 @@ public class TestICUFoldingFilter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new ICUFoldingFilter(tokenizer));
       }
     };

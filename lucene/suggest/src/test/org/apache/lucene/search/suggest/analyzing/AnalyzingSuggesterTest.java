@@ -274,7 +274,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
     final Analyzer analyzer = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
         
         return new TokenStreamComponents(tokenizer) {
           int tokenStreamCounter = 0;
@@ -347,7 +347,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
     final Analyzer analyzer = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
         
         return new TokenStreamComponents(tokenizer) {
           int tokenStreamCounter = 0;
@@ -425,7 +425,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
     return new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
         
         return new TokenStreamComponents(tokenizer) {
 
@@ -632,7 +632,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
 
     @Override
     public TokenStreamComponents createComponents(String fieldName) {
-      MockTokenizer tokenizer = new MockTokenizer(factory, reader, MockTokenizer.WHITESPACE, false, MockTokenizer.DEFAULT_MAX_TOKEN_LENGTH);
+      MockTokenizer tokenizer = new MockTokenizer(factory, MockTokenizer.WHITESPACE, false, MockTokenizer.DEFAULT_MAX_TOKEN_LENGTH);
       tokenizer.setEnableChecks(true);
       TokenStream next;
       if (numStopChars != 0) {
@@ -949,7 +949,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
         
         return new TokenStreamComponents(tokenizer) {
 
@@ -1008,7 +1008,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
         
         return new TokenStreamComponents(tokenizer) {
 
@@ -1078,7 +1078,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
     final Analyzer a = new Analyzer() {
         @Override
         protected TokenStreamComponents createComponents(String fieldName) {
-          Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
+          Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
         
           return new TokenStreamComponents(tokenizer) {
             int tokenStreamCounter = 0;
@@ -1148,7 +1148,7 @@ public class AnalyzingSuggesterTest extends LuceneTestCase {
     final Analyzer a = new Analyzer() {
         @Override
         protected TokenStreamComponents createComponents(String fieldName) {
-          Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.SIMPLE, true);
+          Tokenizer tokenizer = new MockTokenizer(MockTokenizer.SIMPLE, true);
         
           return new TokenStreamComponents(tokenizer) {
             @Override

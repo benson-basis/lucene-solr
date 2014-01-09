@@ -32,7 +32,7 @@ public class TestICUNormalizer2Filter extends BaseTokenStreamTestCase {
   Analyzer a = new Analyzer() {
     @Override
     public TokenStreamComponents createComponents(String fieldName) {
-      Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+      Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
       return new TokenStreamComponents(tokenizer, new ICUNormalizer2Filter(tokenizer));
     }
   };
@@ -62,7 +62,7 @@ public class TestICUNormalizer2Filter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       public TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, new ICUNormalizer2Filter(
             tokenizer,
             /* specify nfc with decompose to get nfd */
@@ -83,7 +83,7 @@ public class TestICUNormalizer2Filter extends BaseTokenStreamTestCase {
     Analyzer a = new Analyzer() {
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new KeywordTokenizer(reader);
+        Tokenizer tokenizer = new KeywordTokenizer();
         return new TokenStreamComponents(tokenizer, new ICUNormalizer2Filter(tokenizer));
       }
     };

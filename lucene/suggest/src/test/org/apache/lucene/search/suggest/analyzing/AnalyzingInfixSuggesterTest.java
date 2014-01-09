@@ -398,7 +398,7 @@ public class AnalyzingInfixSuggesterTest extends LuceneTestCase {
     Analyzer indexAnalyzer = new Analyzer() {
         @Override
         protected TokenStreamComponents createComponents(String fieldName) {
-          MockTokenizer tokens = new MockTokenizer(reader);
+          MockTokenizer tokens = new MockTokenizer();
           return new TokenStreamComponents(tokens,
                                            new StopFilter(TEST_VERSION_CURRENT, tokens, stopWords));
         }
@@ -407,7 +407,7 @@ public class AnalyzingInfixSuggesterTest extends LuceneTestCase {
     Analyzer queryAnalyzer = new Analyzer() {
         @Override
         protected TokenStreamComponents createComponents(String fieldName) {
-          MockTokenizer tokens = new MockTokenizer(reader);
+          MockTokenizer tokens = new MockTokenizer();
           return new TokenStreamComponents(tokens,
                                            new SuggestStopFilter(tokens, stopWords));
         }

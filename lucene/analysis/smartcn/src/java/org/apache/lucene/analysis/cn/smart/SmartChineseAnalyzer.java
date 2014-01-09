@@ -137,7 +137,7 @@ public final class SmartChineseAnalyzer extends Analyzer {
 
   @Override
   public TokenStreamComponents createComponents(String fieldName) {
-    Tokenizer tokenizer = new SentenceTokenizer(reader);
+    Tokenizer tokenizer = new SentenceTokenizer();
     TokenStream result = new WordTokenFilter(tokenizer);
     // result = new LowerCaseFilter(result);
     // LowerCaseFilter is not needed, as SegTokenFilter lowercases Basic Latin text.

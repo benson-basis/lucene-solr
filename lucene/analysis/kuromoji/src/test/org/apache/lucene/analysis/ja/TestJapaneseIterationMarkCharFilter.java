@@ -32,7 +32,7 @@ public class TestJapaneseIterationMarkCharFilter extends BaseTokenStreamTestCase
   private Analyzer keywordAnalyzer = new Analyzer() {
     @Override
     protected TokenStreamComponents createComponents(String fieldName) {
-      Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.KEYWORD, false);
+      Tokenizer tokenizer = new MockTokenizer(MockTokenizer.KEYWORD, false);
       return new TokenStreamComponents(tokenizer, tokenizer);
     }
 
@@ -45,7 +45,7 @@ public class TestJapaneseIterationMarkCharFilter extends BaseTokenStreamTestCase
   private Analyzer japaneseAnalyzer = new Analyzer() {
     @Override
     protected TokenStreamComponents createComponents(String fieldName) {
-      Tokenizer tokenizer = new JapaneseTokenizer(reader, null, false, JapaneseTokenizer.Mode.SEARCH);
+      Tokenizer tokenizer = new JapaneseTokenizer(null, false, JapaneseTokenizer.Mode.SEARCH);
       return new TokenStreamComponents(tokenizer, tokenizer);
     }
 

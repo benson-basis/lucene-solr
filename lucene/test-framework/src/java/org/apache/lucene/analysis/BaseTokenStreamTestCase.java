@@ -973,25 +973,25 @@ public abstract class BaseTokenStreamTestCase extends LuceneTestCase {
     return ret;
   }
 
-  protected MockTokenizer whitespaceMockTokenizer(Reader input) throws IOException {
+  protected static MockTokenizer whitespaceMockTokenizer(Reader input) throws IOException {
     MockTokenizer mockTokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
     mockTokenizer.setReader(input);
     return mockTokenizer;
   }
 
-  protected MockTokenizer whitespaceMockTokenizer(String input) throws IOException {
+  protected static MockTokenizer whitespaceMockTokenizer(String input) throws IOException {
     MockTokenizer mockTokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
     mockTokenizer.setReader(new StringReader(input));
     return mockTokenizer;
   }
 
-  protected MockTokenizer keywordMockTokenizer(Reader input) throws IOException {
+  protected static MockTokenizer keywordMockTokenizer(Reader input) throws IOException {
     MockTokenizer mockTokenizer = new MockTokenizer(MockTokenizer.KEYWORD, false);
     mockTokenizer.setReader(input);
     return mockTokenizer;
   }
 
-  protected MockTokenizer keywordMockTokenizer(String input) throws IOException {
+  protected static MockTokenizer keywordMockTokenizer(String input) throws IOException {
     MockTokenizer mockTokenizer = new MockTokenizer(MockTokenizer.KEYWORD, false);
     mockTokenizer.setReader(new StringReader(input));
     return mockTokenizer;
