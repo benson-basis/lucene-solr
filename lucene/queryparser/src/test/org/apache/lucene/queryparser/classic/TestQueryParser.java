@@ -153,6 +153,7 @@ public class TestQueryParser extends QueryParserTestBase {
   //
   // This test is here as a safety, in case that ant step
   // doesn't work for some reason.
+  @SuppressWarnings("rawtype")
   public void testProtectedCtors() throws Exception {
     try {
       QueryParser.class.getConstructor(new Class[] {CharStream.class});
