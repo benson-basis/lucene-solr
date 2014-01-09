@@ -525,6 +525,24 @@ as described below.
   {@link org.apache.lucene.analysis.TokenStream#end()}
   or {@link org.apache.lucene.analysis.TokenStream#close()}, it
   <strong>must</strong> call the corresponding superclass method.
+<h4>Creating delegates</h4>
+  Forwarding classes (those which extend {@link org.apache.lucene.analysis.Tokenizer} but delegate
+  selected logic to another tokenizer) must also set the reader to the delegate in the overridden
+  {@link org.apache.lucene.analysis.Tokenizer#reset()} method, e.g.:
+  <pre>
+    {@code
+      public class ForwardingTokenizer extends Tokenizer {
+         private Tokenizer delegate;
+         ...
+         @Override
+         public void reset() {
+            super.reset();
+            delegate.setReader(this.input);
+            delegate.reset();
+         }
+      }
+    }
+  </pre>
 <h3>Testing Your Analysis Component</h3>
 <p>
     The lucene-test-framework component defines
