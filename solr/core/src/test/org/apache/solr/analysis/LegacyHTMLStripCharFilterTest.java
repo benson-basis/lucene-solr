@@ -261,7 +261,7 @@ public class LegacyHTMLStripCharFilterTest extends BaseTokenStreamTestCase {
 
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
+        Tokenizer tokenizer = new MockTokenizer(MockTokenizer.WHITESPACE, false);
         return new TokenStreamComponents(tokenizer, tokenizer);
       }
 

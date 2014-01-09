@@ -68,7 +68,7 @@ public class BoolField extends PrimitiveFieldType {
   protected final static Analyzer boolAnalyzer = new SolrAnalyzer() {
     @Override
     public TokenStreamComponents createComponents(String fieldName) {
-      Tokenizer tokenizer = new Tokenizer(reader) {
+      Tokenizer tokenizer = new Tokenizer() {
         final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
         boolean done = false;
 

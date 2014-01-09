@@ -440,7 +440,7 @@ public abstract class FieldType extends FieldProperties {
 
     @Override
     public TokenStreamComponents createComponents(String fieldName) {
-      Tokenizer ts = new Tokenizer(reader) {
+      Tokenizer ts = new Tokenizer() {
         final char[] cbuf = new char[maxChars];
         final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
         final OffsetAttribute offsetAtt = addAttribute(OffsetAttribute.class);

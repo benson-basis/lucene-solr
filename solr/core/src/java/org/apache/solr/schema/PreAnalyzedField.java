@@ -87,7 +87,7 @@ public class PreAnalyzedField extends FieldType {
       
       @Override
       protected TokenStreamComponents createComponents(String fieldName) {
-        return new TokenStreamComponents(new PreAnalyzedTokenizer(reader, parser));
+        return new TokenStreamComponents(new PreAnalyzedTokenizer(parser));
       }
       
     };
@@ -198,7 +198,8 @@ public class PreAnalyzedField extends FieldType {
     if (val == null || val.trim().length() == 0) {
       return null;
     }
-    PreAnalyzedTokenizer parse = new PreAnalyzedTokenizer(new StringReader(val), parser);
+    PreAnalyzedTokenizer parse = new PreAnalyzedTokenizer(parser);
+    parse.setReader(new StringReader(val));
     parse.reset(); // consume
     org.apache.lucene.document.FieldType type = createFieldType(field);
     if (type == null) {
@@ -254,9 +255,8 @@ public class PreAnalyzedField extends FieldType {
     private Reader lastReader;
     private Reader input; // hides original input since we replay saved states (and dont reuse)
     
-    public PreAnalyzedTokenizer(Reader reader, PreAnalyzedParser parser) {
-      super(reader);
-      this.input = reader;
+    public PreAnalyzedTokenizer(PreAnalyzedParser parser) {
+      super();
       this.parser = parser;
     }
     
@@ -271,7 +271,7 @@ public class PreAnalyzedField extends FieldType {
     public byte[] getBinaryValue() {
       return binaryValue;
     }
-    
+
     @Override
     public final boolean incrementToken() {
       // lazy init the iterator
@@ -290,6 +290,8 @@ public class PreAnalyzedField extends FieldType {
   
     @Override
     public final void reset() throws IOException {
+      /* This is called after setReader, so here's how we can get the input we care about ... */
+      this.input = super.input;
       // NOTE: this acts like rewind if you call it again
       if (input != lastReader) {
         lastReader = input;
