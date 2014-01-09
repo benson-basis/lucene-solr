@@ -39,7 +39,7 @@ public final class UIMABaseAnalyzer extends Analyzer {
 
   @Override
   protected TokenStreamComponents createComponents(String fieldName) {
-    return new TokenStreamComponents(new UIMAAnnotationsTokenizer(descriptorPath, tokenType, configurationParameters, reader));
+    return new TokenStreamComponents(new UIMAAnnotationsTokenizer(descriptorPath, tokenType, configurationParameters));
   }
 
 }
