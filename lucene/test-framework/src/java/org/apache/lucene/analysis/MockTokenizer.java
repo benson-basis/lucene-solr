@@ -89,12 +89,11 @@ public class MockTokenizer extends Tokenizer {
   // evil: but we don't change the behavior with this random, we only switch up how we read
   private final Random random = new Random(RandomizedContext.current().getRandom().nextLong());
   
-  public MockTokenizer(AttributeFactory factory,  CharacterRunAutomaton runAutomaton, boolean lowerCase, int maxTokenLength) {
+  public MockTokenizer(AttributeFactory factory, CharacterRunAutomaton runAutomaton, boolean lowerCase, int maxTokenLength) {
     super(factory);
     this.runAutomaton = runAutomaton;
     this.lowerCase = lowerCase;
     this.state = runAutomaton.getInitialState();
-    this.streamState = State.SETREADER;
     this.maxTokenLength = maxTokenLength;
   }
 
@@ -117,7 +116,7 @@ public class MockTokenizer extends Tokenizer {
   /** Calls {@link #MockTokenizer(org.apache.lucene.util.AttributeSource.AttributeFactory,CharacterRunAutomaton,boolean)
    *                MockTokenizer(AttributeFactory, Reader, WHITESPACE, true)} */
   public MockTokenizer(AttributeFactory factory) {
-    this(WHITESPACE, true);
+    this(factory, WHITESPACE, true);
   }
 
   @Override

@@ -177,6 +177,7 @@ public abstract class Analyzer implements Closeable {
       components = createComponents(fieldName);
       reuseStrategy.setReusableComponents(this, fieldName, components);
     }
+
     components.setReader(r);
     components.reusableStringReader = strReader;
     return components.getTokenStream();
