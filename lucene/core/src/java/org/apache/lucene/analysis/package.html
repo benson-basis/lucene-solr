@@ -94,7 +94,7 @@ and proximity searches (though sentence identification is not provided by Lucene
     corrected character offsets to account for these modifications.  This
     capability allows highlighting to function over the original text when 
     indexed tokens are created from CharFilter-modified text with offsets
-    that are not the same as those in the original text. {@link org.apache.lucene.analysis.Tokenizer#SetReader(java.io.Reader)}
+    that are not the same as those in the original text. {@link org.apache.lucene.analysis.Tokenizer#setReader(java.io.Reader)}
     accept CharFilters.  CharFilters may
     be chained to perform multiple pre-tokenization modifications.
   </li>
@@ -125,7 +125,7 @@ and proximity searches (though sentence identification is not provided by Lucene
     The {@link org.apache.lucene.analysis.Analyzer} is a
     <strong>factory</strong> for analysis chains. Analyzers don't
     process text, Analyzers construct CharFilters, Tokenizers, and/or
-    TokenFilters that process text &ndash;. An Analyzer has two tasks: 
+    TokenFilters that process text. An Analyzer has two tasks: 
     to produce {@link org.apache.lucene.analysis.TokenStream}s that accept a
     reader and produces tokens, and to wrap or otherwise
     pre-process {@link java.io.Reader} objects.
@@ -153,7 +153,7 @@ and proximity searches (though sentence identification is not provided by Lucene
 <p>
   If you want to use a particular combination of CharFilters, a
   Tokenizer, and some TokenFilters, the simplest thing is often an
-  create an anonymous subclass of Analyzer provide {@link
+  create an anonymous subclass of Analyzer, provide {@link
   org.apache.lucene.analysis.Analyzer#createComponents(String)} and perhaps also
   {@link org.apache.lucene.analysis.Analyzer#initReader(String,
   java.io.Reader)}. However, if you need the same set of components
