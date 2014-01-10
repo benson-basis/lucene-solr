@@ -21,6 +21,7 @@
 package org.apache.solr.update;
 
 import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
@@ -214,7 +215,17 @@ public class DirectUpdateHandler2 extends UpdateHandler implements SolrCoreState
             } else {
               Document luceneDocument = cmd.getLuceneDocument();
               // SolrCore.verbose("updateDocument",updateTerm,luceneDocument,writer);
-              writer.updateDocument(updateTerm, luceneDocument, schema.getAnalyzer());
+              try {
+                writer.updateDocument(updateTerm, luceneDocument, schema.getAnalyzer());
+              } catch (Throwable t) {
+                String id = "unknown";
+                if (idField != null && idField.getName() != null) {
+                  Field idLuceneField = luceneDocument.getField(idField.getName());
+                  id = idField.getType().indexedToReadable(idLuceneField.stringValue());
+                }
+                throw new SolrException(SolrException.ErrorCode.SERVER_ERROR, String.format("Exception writing document id %s to the index; possible analysis error.",
+                    id), t);
+              }
             }
             // SolrCore.verbose("updateDocument",updateTerm,"DONE");
             

@@ -18,6 +18,7 @@ package org.apache.solr.update;
  */
 
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.common.SolrException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -40,12 +41,16 @@ public class AnalysisErrorHandlingTest extends SolrTestCaseJ4 {
   @Test
   public void testMultipleUpdatesPerAdd() {
     clearIndex();
-    String res = h.update("<add><doc><field name=\"id\">1</field><field name=\"text\">Alas Poor Yorik</field></doc></add>");
-    System.err.println("res");
-    assertQ(req("id:[0 TO 99]")
-            ,"//*[@numFound='2']"
-            );
-
+    boolean caught = false;
+    try {
+      h.update("<add><doc><field name=\"id\">1</field><field name=\"text\">Alas Poor Yorik</field></doc></add>");
+    } catch (SolrException se) {
+      assertTrue(se.getMessage().contains("Exception writing document id 1 to the index"));
+      caught = true;
+    }
+    if (!caught) {
+      fail("Failed to even throw the exception we are stewing over.");
+    }
   }
 
 
