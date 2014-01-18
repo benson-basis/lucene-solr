@@ -16,9 +16,8 @@
  limitations under the License.
 -->
 <!--
-     Striped down schema used by SampleTest to demonstrate picking any
-     schema filename you want.
-
+     Striped down schema used by AnalysisErrorHandlingTest. The goal here is to have one
+     text field that blows up in analysis, and an ID field for diagnosis.
   -->
 
 <schema name="test" version="1.5">

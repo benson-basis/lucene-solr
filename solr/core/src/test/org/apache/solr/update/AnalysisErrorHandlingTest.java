@@ -23,8 +23,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * Tests some basic functionality of Solr while demonstrating good
- * Best Practices for using AbstractSolrTestCase
+ * Test that runtime exceptions thrown during analysis
+ * result in Solr errors that contain the document ID.
  */
 public class AnalysisErrorHandlingTest extends SolrTestCaseJ4 {
 
@@ -41,17 +41,11 @@ public class AnalysisErrorHandlingTest extends SolrTestCaseJ4 {
   @Test
   public void testMultipleUpdatesPerAdd() {
     clearIndex();
-    boolean caught = false;
     try {
       h.update("<add><doc><field name=\"id\">1</field><field name=\"text\">Alas Poor Yorik</field></doc></add>");
+      fail("Failed to even throw the exception we are stewing over.");
     } catch (SolrException se) {
       assertTrue(se.getMessage().contains("Exception writing document id 1 to the index"));
-      caught = true;
-    }
-    if (!caught) {
-      fail("Failed to even throw the exception we are stewing over.");
     }
   }
-
-
 }
