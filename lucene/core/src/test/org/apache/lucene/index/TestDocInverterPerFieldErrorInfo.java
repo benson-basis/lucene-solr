@@ -46,25 +46,29 @@ public class TestDocInverterPerFieldErrorInfo extends LuceneTestCase {
     }
   }
 
-  @Test
-  public void testInfoStreamGetsFieldName() throws Exception {
-    Directory dir = newDirectory();
-    IndexWriter writer;
-    IndexWriterConfig c = new IndexWriterConfig(TEST_VERSION_CURRENT, new Analyzer() {
-      @Override
-      protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new MockTokenizer();
+  private static class ThrowingAnalyzer extends Analyzer {
+    @Override
+    protected TokenStreamComponents createComponents(String fieldName) {
+      Tokenizer tokenizer = new MockTokenizer();
+      if (fieldName.equals("distinctiveFieldName")) {
         TokenFilter tosser = new TokenFilter(tokenizer) {
-
           @Override
           public boolean incrementToken() throws IOException {
             throw new BadNews("Something is icky.");
           }
         };
         return new TokenStreamComponents(tokenizer, tosser);
+      } else {
+        return new TokenStreamComponents(tokenizer);
       }
-    });
+    }
+  }
 
+  @Test
+  public void testInfoStreamGetsFieldName() throws Exception {
+    Directory dir = newDirectory();
+    IndexWriter writer;
+    IndexWriterConfig c = new IndexWriterConfig(TEST_VERSION_CURRENT, new ThrowingAnalyzer());
     final ByteArrayOutputStream infoBytes = new ByteArrayOutputStream();
     PrintStream infoPrintStream = new PrintStream(infoBytes, true, "utf-8");
     PrintStreamInfoStream printStreamInfoStream = new PrintStreamInfoStream(infoPrintStream);
@@ -80,7 +84,34 @@ public class TestDocInverterPerFieldErrorInfo extends LuceneTestCase {
       String infoStream = new String(infoBytes.toByteArray(), "utf-8");
       assertTrue(infoStream.contains("distinctiveFieldName"));
     }
+
     writer.close();
     dir.close();
   }
+
+  @Test
+  public void testNoExtraNoise() throws Exception {
+    Directory dir = newDirectory();
+    IndexWriter writer;
+    IndexWriterConfig c = new IndexWriterConfig(TEST_VERSION_CURRENT, new ThrowingAnalyzer());
+    final ByteArrayOutputStream infoBytes = new ByteArrayOutputStream();
+    PrintStream infoPrintStream = new PrintStream(infoBytes, true, "utf-8");
+    PrintStreamInfoStream printStreamInfoStream = new PrintStreamInfoStream(infoPrintStream);
+    c.setInfoStream(printStreamInfoStream);
+    writer = new IndexWriter(dir, c);
+    Document doc = new Document();
+    doc.add(newField("boringFieldName", "aaa ", storedTextType));
+    try {
+      writer.addDocument(doc);
+    } catch(BadNews badNews) {
+      fail("Unwanted exception");
+    }
+    infoPrintStream.flush();
+    String infoStream = new String(infoBytes.toByteArray(), "utf-8");
+    assertFalse(infoStream.contains("boringFieldName"));
+
+    writer.close();
+    dir.close();
+  }
+
 }
