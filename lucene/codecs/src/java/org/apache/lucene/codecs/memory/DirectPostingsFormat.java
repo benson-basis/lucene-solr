@@ -121,7 +121,7 @@ public final class DirectPostingsFormat extends PostingsFormat {
     }
   }
 
-  private static final class DirectFields extends FieldsProducer {
+  static final class DirectFields extends FieldsProducer {
     private final Map<String,DirectField> fields = new TreeMap<>();
 
     public DirectFields(SegmentReadState state, Fields fields, int minSkipCount, int lowFreqCutoff) throws IOException {
@@ -166,7 +166,7 @@ public final class DirectPostingsFormat extends PostingsFormat {
     }
   }
 
-  private final static class DirectField extends Terms {
+  final static class DirectField extends Terms {
 
     private static abstract class TermAndSkip {
       public int[] skips;
@@ -175,7 +175,7 @@ public final class DirectPostingsFormat extends PostingsFormat {
       public abstract long ramBytesUsed();
     }
 
-    private static final class LowFreqTerm extends TermAndSkip {
+    static final class LowFreqTerm extends TermAndSkip {
       public final int[] postings;
       public final byte[] payloads;
       public final int docFreq;
@@ -196,7 +196,7 @@ public final class DirectPostingsFormat extends PostingsFormat {
     }
 
     // TODO: maybe specialize into prx/no-prx/no-frq cases?
-    private static final class HighFreqTerm extends TermAndSkip {
+    static final class HighFreqTerm extends TermAndSkip {
       public final long totalTermFreq;
       public final int[] docIDs;
       public final int[] freqs;
@@ -2038,7 +2038,7 @@ public final class DirectPostingsFormat extends PostingsFormat {
   }
 
   // TODO: specialize offsets and not
-  private final static class HighFreqDocsAndPositionsEnum extends DocsAndPositionsEnum {
+  final static class HighFreqDocsAndPositionsEnum extends DocsAndPositionsEnum {
     private int[] docIDs;
     private int[] freqs;
     private int[][] positions;
