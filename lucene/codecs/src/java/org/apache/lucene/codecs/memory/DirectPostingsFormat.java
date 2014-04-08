@@ -31,6 +31,7 @@ import org.apache.lucene.index.DocsAndPositionsEnum;
 import org.apache.lucene.index.DocsEnum;
 import org.apache.lucene.index.FieldInfo.IndexOptions;
 import org.apache.lucene.index.FieldInfo;
+import org.apache.lucene.index.FieldInfos;
 import org.apache.lucene.index.Fields;
 import org.apache.lucene.index.OrdTermState;
 import org.apache.lucene.index.SegmentReadState;
@@ -110,7 +111,7 @@ public final class DirectPostingsFormat extends PostingsFormat {
       FieldsProducer loadedPostings;
       try {
         postings.checkIntegrity();
-        loadedPostings = new DirectFields(state, postings, minSkipCount, lowFreqCutoff);
+        loadedPostings = new DirectFields(state.fieldInfos, postings, minSkipCount, lowFreqCutoff);
       } finally {
         postings.close();
       }
@@ -124,9 +125,9 @@ public final class DirectPostingsFormat extends PostingsFormat {
   static final class DirectFields extends FieldsProducer {
     private final Map<String,DirectField> fields = new TreeMap<>();
 
-    public DirectFields(SegmentReadState state, Fields fields, int minSkipCount, int lowFreqCutoff) throws IOException {
+    public DirectFields(FieldInfos fieldInfos, Fields fields, int minSkipCount, int lowFreqCutoff) throws IOException {
       for (String field : fields) {
-        this.fields.put(field, new DirectField(state, field, fields.terms(field), minSkipCount, lowFreqCutoff));
+        this.fields.put(field, new DirectField(fieldInfos, field, fields.terms(field), minSkipCount, lowFreqCutoff));
       }
     }
 
@@ -278,8 +279,8 @@ public final class DirectPostingsFormat extends PostingsFormat {
       }
     }
 
-    public DirectField(SegmentReadState state, String field, Terms termsIn, int minSkipCount, int lowFreqCutoff) throws IOException {
-      final FieldInfo fieldInfo = state.fieldInfos.fieldInfo(field);
+    public DirectField(FieldInfos fieldInfos, String field, Terms termsIn, int minSkipCount, int lowFreqCutoff) throws IOException {
+      final FieldInfo fieldInfo = fieldInfos.fieldInfo(field);
 
       sumTotalTermFreq = termsIn.getSumTotalTermFreq();
       sumDocFreq = termsIn.getSumDocFreq();
