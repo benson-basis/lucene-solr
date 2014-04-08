@@ -36,6 +36,7 @@ import java.io.IOException;
 
 /**
  * An ephemeral codec, for use in a FilterAtomicReader, that keeps postings in memory.
+ * Probably a dud, but gives me something to look at.
  */
 public class DirectPostingsFormatDelegatingCodec extends Codec {
   private final int minSkipCount;
